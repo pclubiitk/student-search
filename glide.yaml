@@ -1,0 +1,18 @@
+package: github.com/yashsriv/student-search
+import:
+- package: gopkg.in/pg.v5
+  version: ^5.2.10
+  subpackages:
+  - orm
+- package: github.com/PuerkitoBio/goquery
+  version: ^1.1.0
+- package: gopkg.in/kataras/iris.v5
+  version: ^5.0.0
+- package: github.com/olebedev/config
+- package: gopkg.in/square/go-jose.v1
+  version: ^2.0.1
+- package: github.com/iris-contrib/middleware
+  version: ^5.0.0
+  subpackages:
+  - logger
+  - recovery
