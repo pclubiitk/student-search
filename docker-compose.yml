@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "27017"
+    networks:
+      - studentsearch
+
+  server:
+    image: pclubiitk/student-search
+    ports:
+      - "60005:8080"
+    networks:
+      - studentsearch
+    links:
+      - postgres
+    environment:
+      - STUDENT_SEARCH_PG_HOST=postgres
+
+volumes:
+  data:
+
+networks:
+  studentsearch:
