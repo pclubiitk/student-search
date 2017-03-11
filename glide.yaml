@@ -1,4 +1,4 @@
-package: github.com/yashsriv/student-search
+package: github.com/pclubiitk/student-search
 import:
 - package: gopkg.in/pg.v5
   version: ^5.2.10
@@ -16,3 +16,4 @@ import:
   subpackages:
   - logger
   - recovery
+  - cors

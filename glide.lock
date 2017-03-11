@@ -1,5 +1,5 @@
-hash: 0d4efa76d4d464c8ecfe7c58562fa3854be03a7022061391047ae7b77027d50f
-updated: 2017-02-19T22:44:28.012911809+05:30
+hash: cb38d51a86177505ac77f1439344dca55df6a02a241cb15373dbc08d6fc39e28
+updated: 2017-03-11T21:19:19.665577037+05:30
 imports:
 - name: github.com/andybalholm/cascadia
   version: 349dd0209470eabd9514242c688c403c0926d266
@@ -39,6 +39,7 @@ imports:
 - name: github.com/iris-contrib/middleware
   version: eff973db50aaea60190e75f8f5dc343f7de34b38
   subpackages:
+  - cors
   - logger
   - recovery
 - name: github.com/jinzhu/inflection
@@ -123,7 +124,7 @@ imports:
   subpackages:
   - utils
 - name: gopkg.in/pg.v5
-  version: df7df2efaad2e36e21b499fab034677b198a73a2
+  version: 2246060a2a43f8282ad53295d56d780dbc930b7f
   subpackages:
   - internal
   - internal/parser
@@ -131,7 +132,7 @@ imports:
   - orm
   - types
 - name: gopkg.in/square/go-jose.v1
-  version: 296c7f1463ec9b712176dc804dea0173d06dc728
+  version: d5683d954d08cd430460c651e2a2fff4f3b39f86
 - name: gopkg.in/square/go-jose.v2
   version: 296c7f1463ec9b712176dc804dea0173d06dc728
   subpackages:

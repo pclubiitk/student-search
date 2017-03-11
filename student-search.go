@@ -5,6 +5,7 @@ import (
 
 	"github.com/pclubiitk/student-search/database"
 
+	"github.com/iris-contrib/middleware/cors"
 	"github.com/iris-contrib/middleware/logger"
 	"github.com/iris-contrib/middleware/recovery"
 	"github.com/olebedev/config"
@@ -19,9 +20,10 @@ func main() {
 
 	iris.Use(logger.New())
 	iris.Use(recovery.New())
+	iris.Use(cors.Default())
 
 	// log http errors
-	iris.OnError(iris.StatusNotFound, (logger.New()).Serve)
+	iris.OnError(iris.StatusNotFound, myCorsMiddleware)
 
 	pghost, pgport, username, dbname, port := getConfig()
 
@@ -39,6 +41,23 @@ func main() {
 	StudentSearchRoute(db)
 
 	iris.Listen(fmt.Sprintf(":%d", port))
+}
+
+// myCorsMiddleware for handling OPTIONS requests
+func myCorsMiddleware(ctx *iris.Context) {
+
+	if ctx.MethodString() == "OPTIONS" {
+		ctx.SetHeader("Access-Control-Allow-Origin", "*")
+		ctx.SetHeader("Access-Control-Allow-Headers", "content-type")
+		err := ctx.Text(200, "")
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		errorLogger := logger.New()
+		errorLogger.Serve(ctx)
+	}
+
 }
 
 func getConfig() (string, string, string, string, int) {
