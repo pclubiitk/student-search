@@ -1,0 +1,44 @@
+.width-60 {
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  margin: 0 auto;
+  padding-top: 20px;
+  width: 60%;
+}
+
+md-select {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  padding: 25px;
+}
+
+.mat-select-underline {
+  background-color: #fff !important;
+  color: #fff;
+}
+
+.text-area {
+  background-color: #fff;
+  padding: 10px;
+}
+
+.search-box {
+  width: 100%;
+}
+
+md-icon {
+  text-align: center;
+  width: 80px;
+}
+
+.search-grid {
+  background-color: #eee;
+}
+
+md-spinner {
+  margin: 10vh auto;
+}
+
+masonry {
+  margin: 0 auto;
+}

@@ -1,0 +1,30 @@
+.img {
+  background-size: cover;
+  flex-grow: 1;
+  min-height: 120px;
+  min-width: 120px;
+  width: 20%;
+}
+
+.info {
+  flex-grow: 3;
+  padding: 2vmin;
+  width: 80%;
+}
+
+.name {
+  font-weight: 700;
+}
+
+.container {
+  align-items: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 150px;
+  justify-content: center;
+  margin: 2vmin;
+  padding: 1vmin;
+  width: 400px;
+}
