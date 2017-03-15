@@ -61,7 +61,7 @@
 <div *ngIf="!loading">
   <masonry [options]="{ fitWidth: true }">
     <masonry-brick class="brick" *ngFor="let item of result">
-      <student [student]="item"></student>
+      <search-student [student]="item"></search-student>
     </masonry-brick>
   </masonry>
 </div>

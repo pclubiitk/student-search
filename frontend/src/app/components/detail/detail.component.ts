@@ -6,7 +6,7 @@ import { SearchHelper } from '../../helpers/search.helper';
 import { Student } from '../../models/student.model';
 
 @Component({
-  selector: 'detail',
+  selector: 'search-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })

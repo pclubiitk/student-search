@@ -1,5 +1,8 @@
 export class SearchHelper {
 
+  static GenericMale = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yL/r/HsTZSDw4avx.gif';
+  static GenericFemale = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yp/r/yDnr5YfbJCH.gif';
+
   static branchMappings = {
     'Chemical Engg.': 'CHE',
     'Civil Engg.': 'CE',
@@ -44,9 +47,6 @@ export class SearchHelper {
     }
     return value;
   }
-
-  static GenericMale = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yL/r/HsTZSDw4avx.gif';
-  static GenericFemale = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yp/r/yDnr5YfbJCH.gif'
 
   static ImageURL(gender: string, rollnum: string, userid: string) {
     const generic = gender === 'F' ? this.GenericFemale : this.GenericMale;

@@ -7,7 +7,7 @@ import { SearchHelper } from '../../helpers/search.helper';
 import { Student } from '../../models/student.model';
 
 @Component({
-  selector: 'student',
+  selector: 'search-student',
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.css']
 })
