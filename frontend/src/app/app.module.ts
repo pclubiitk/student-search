@@ -6,14 +6,19 @@ import { MaterialModule } from '@angular/material';
 
 import { MasonryModule } from 'angular2-masonry';
 
-import { AppComponent } from './app.component';
-import { SearchService } from './search.service';
-import { StudentComponent } from './student.component';
+import { DetailComponent } from './components/detail';
+import { SearchComponent } from './components/search';
+import { SearchService } from './services/search.service';
+import { StudentComponent } from './components/student';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    DetailComponent,
+    SearchComponent,
     StudentComponent
+  ],
+  entryComponents: [
+    DetailComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +28,6 @@ import { StudentComponent } from './student.component';
     MaterialModule
   ],
   providers: [SearchService],
-  bootstrap: [AppComponent]
+  bootstrap: [SearchComponent]
 })
 export class AppModule { }

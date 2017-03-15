@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { SearchHelper } from './search.helper';
-import { Student } from './student.model';
+import { SearchHelper } from '../helpers/search.helper';
+import { Student } from '../models/student.model';
 
 @Injectable()
 export class SearchService {

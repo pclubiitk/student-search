@@ -45,4 +45,14 @@ export class SearchHelper {
     return value;
   }
 
+  static GenericMale = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yL/r/HsTZSDw4avx.gif';
+  static GenericFemale = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yp/r/yDnr5YfbJCH.gif'
+
+  static ImageURL(gender: string, rollnum: string, userid: string) {
+    const generic = gender === 'F' ? this.GenericFemale : this.GenericMale;
+    const iitkhome = `http://home.iitk.ac.in/~${ userid }/dp`;
+    const oaimage = `/Oa/Jsp/Photo/${ rollnum }_0.jpg`;
+    return `url("${ iitkhome }"), url("${ oaimage }"), url("${ generic }")`;
+  }
+
 }

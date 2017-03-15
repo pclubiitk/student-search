@@ -1,0 +1,94 @@
+<h1 md-dialog-title> {{ student.n }} </h1>
+<md-dialog-content>
+  <!--
+  <div>
+    {{ student | json }}
+  </div>
+  -->
+  <div class="container">
+    <div class="img" [style.background-image]="url()">
+    </div>
+    <div class="info">
+      <table>
+        <tr>
+          <td>
+            Name
+          </td>
+          <td>
+            {{ student.n }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Programme
+          </td>
+          <td>
+            {{ student.p }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Department
+          </td>
+          <td>
+            {{ student.d }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Roll
+          </td>
+          <td>
+            {{ student.i }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Campus Address
+          </td>
+          <td>
+            {{ student.r + " " + student.h }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Hometown
+          </td>
+          <td>
+            {{ student.a }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+             Blood Group
+          </td>
+          <td>
+            {{ student.b }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Gender
+          </td>
+          <td>
+            {{ student.g }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Email
+          </td>
+          <td>
+            <a [href]="'mailto:' + student.u + '@iitk.ac.in'"> {{ student.u }}@iitk.ac.in </a>
+          </td>
+        </tr>
+
+
+      </table>
+    </div>
+  </div>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button md-dialog-close>Close</button>
+</md-dialog-actions>
+

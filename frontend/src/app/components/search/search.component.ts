@@ -4,16 +4,16 @@ import { Subject }           from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { SearchHelper } from './search.helper';
-import { SearchService } from './search.service';
-import { Student } from './student.model';
+import { SearchHelper } from '../../helpers/search.helper';
+import { SearchService } from '../../services/search.service';
+import { Student } from '../../models/student.model';
 
 @Component({
-  selector: 'ssearch-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'search-root',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
-export class AppComponent implements OnInit {
+export class SearchComponent implements OnInit {
 
   loading = true;
   students: Array<Student> = [];
@@ -61,6 +61,7 @@ export class AppComponent implements OnInit {
           this.latestTerm = term;
           this.update();
         } else {
+          this.latestTerm = '';
           this.result = [];
         }
       });
@@ -69,7 +70,6 @@ export class AppComponent implements OnInit {
       .debounceTime(300)
       .distinctUntilChanged()
       .subscribe(term => {
-        console.log(term);
         this.currentAdd = term;
         this.update();
       });
