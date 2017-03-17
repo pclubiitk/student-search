@@ -20,27 +20,27 @@ const FACTOR = 50;
 export class SearchComponent implements OnInit {
 
   students: Array<Student> = [];
-  private loading = true;
+  loading = true;
 
   private maxIndex: number;
-  private allResults: Array<Student> = [];
-  private result: Array<Student> = [];
+  allResults: Array<Student> = [];
+  result: Array<Student> = [];
 
-  private deps: Array<string> = [];
-  private progs: Array<string> = [];
-  private bloodgrps: Array<string> = [];
-  private halls: Array<string> = [];
-  private genders: Array<string> = [];
-  private years: Array<string> = [];
+  deps: Array<string> = [];
+  progs: Array<string> = [];
+  bloodgrps: Array<string> = [];
+  halls: Array<string> = [];
+  genders: Array<string> = [];
+  years: Array<string> = [];
 
-  private latestTerm: string = '';
-  private currentYear = 'Any';
-  private currentGender = 'Any';
-  private currentHall = 'Any';
-  private currentProg = 'Any';
-  private currentDep = 'Any';
-  private currentGrp = 'Any';
-  private currentAdd = '';
+  private latestTerm = '';
+  currentYear = 'Any';
+  currentGender = 'Any';
+  currentHall = 'Any';
+  currentProg = 'Any';
+  currentDep = 'Any';
+  currentGrp = 'Any';
+  currentAdd = '';
 
   private searchTerms = new Subject<string>();
   private addTerms = new Subject<string>();
@@ -138,7 +138,7 @@ export class SearchComponent implements OnInit {
       data: {
         mails: this.allResults.map((val) => val.u + '@iitk.ac.in')
       }
-    })
+    });
   }
 
 }
