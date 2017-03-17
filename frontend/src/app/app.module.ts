@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { MasonryModule } from 'angular2-masonry';
 
 import { DetailComponent } from './components/detail';
@@ -24,6 +25,7 @@ import { StudentComponent } from './components/student';
     BrowserModule,
     FormsModule,
     HttpModule,
+    InfiniteScrollModule,
     MasonryModule,
     MaterialModule
   ],

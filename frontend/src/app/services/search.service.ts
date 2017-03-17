@@ -28,82 +28,65 @@ export class SearchService {
   }
 
   getResults(students: Array<Student>, term: string, year?: string, gender?: string,
-            hall?: string, prog?: string, dep?: string,
+             hall?: string, prog?: string, dep?: string,
              grp?: string, hometown ?: string): Array<Student> {
 
     const escape = (s: string) => {
       return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     };
 
+
     const filter = (elem: Student): Boolean => {
-      let yearregex, genderregex, hallregex, progregex, depregex, grpregex, addregex;
 
-      if (year === null || year === 'Any') {
-        yearregex = new RegExp('.*', 'i');
-      } else {
-        yearregex = new RegExp(year, 'i');
-      }
-
-      if (gender === null || gender === 'Any') {
-        genderregex = new RegExp('.*', 'i');
-      } else {
-        genderregex = new RegExp(gender, 'i');
+      if (!(year === null || year === 'Any')) {
+        if (SearchHelper.ParseYear(elem.i) !== year) {
+          return false;
+        }
       }
 
-      if (hall === null || hall === 'Any') {
-        hallregex = new RegExp('.*', 'i');
-      } else {
-        hallregex = new RegExp(hall, 'i');
+      if (!(gender === null || gender === 'Any')) {
+        if (elem.g !== gender) {
+          return false;
+        }
       }
 
-      if (prog === null || prog === 'Any') {
-        progregex = new RegExp('.*', 'i');
-      } else {
-        progregex = new RegExp(prog, 'i');
+      if (!(hall === null || hall === 'Any')) {
+        if (elem.h !== hall) {
+          return false;
+        }
       }
 
-      if (dep === null || dep === 'Any') {
-        depregex = new RegExp('.*', 'i');
-      } else {
-        depregex = new RegExp(dep, 'i');
+      if (!(prog === null || prog === 'Any')) {
+        if (elem.p !== prog) {
+          return false;
+        }
       }
 
-      if (grp === null || grp === 'Any') {
-        grpregex = new RegExp('.*', 'i');
-      } else {
-        grpregex = new RegExp(grp, 'i');
+      if (!(dep === null || dep === 'Any')) {
+        if (SearchHelper.ParseBranch(elem.d) !== dep) {
+          return false;
+        }
       }
 
-      if (hometown === null || hometown === '') {
-        addregex = new RegExp('.*', 'i');
-      } else {
-        addregex = new RegExp(hometown, 'i');
+      if (!(grp === null || grp === 'Any')) {
+        if (elem.b !== grp) {
+          return false;
+        }
       }
 
-      if (!yearregex.test(SearchHelper.ParseYear(elem.i))) {
-        return false;
-      }
-      if (!genderregex.test(elem.g)) {
-        return false;
-      }
-      if (!hallregex.test(elem.h)) {
-        return false;
-      }
-      if (!progregex.test(elem.p)) {
-        return false;
-      }
-      if (!depregex.test(SearchHelper.ParseBranch(elem.d))) {
-        return false;
-      }
-      if (!grpregex.test(elem.b)) {
-        return false;
-      }
-      if (!addregex.test(elem.a)) {
-        return false;
+      if (!(hometown === null || hometown === '')) {
+        const addregex = new RegExp(hometown, 'i');
+        if (!addregex.test(elem.a)) {
+          return false;
+        }
       }
 
-      const termregex = new RegExp(escape(term).replace(/\s+/g, ' '), 'i');
-      return (termregex.test(elem.i) || termregex.test(elem.u) || termregex.test(elem.n.replace(/\s+/g, ' ')));
+      if (!(term === null || term === '')) {
+        const termregex = new RegExp(escape(term).replace(/\s+/g, ' '), 'i');
+        return (termregex.test(elem.i) || termregex.test(elem.u) || termregex.test(elem.n.replace(/\s+/g, ' ')));
+      }
+
+      return true;
 
     };
 

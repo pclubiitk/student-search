@@ -8,6 +8,8 @@ import { SearchHelper } from '../../helpers/search.helper';
 import { SearchService } from '../../services/search.service';
 import { Student } from '../../models/student.model';
 
+const FACTOR = 50;
+
 @Component({
   selector: 'search-root',
   templateUrl: './search.component.html',
@@ -15,25 +17,28 @@ import { Student } from '../../models/student.model';
 })
 export class SearchComponent implements OnInit {
 
-  loading = true;
   students: Array<Student> = [];
-  latestTerm: string = '';
-  result: Array<Student> = [];
+  private loading = true;
 
-  deps: Array<string> = [];
-  progs: Array<string> = [];
-  bloodgrps: Array<string> = [];
-  halls: Array<string> = [];
-  genders: Array<string> = [];
-  years: Array<string> = [];
+  private maxIndex: number;
+  private allResults: Array<Student> = [];
+  private result: Array<Student> = [];
 
-  currentYear = 'Any';
-  currentGender = 'Any';
-  currentHall = 'Any';
-  currentProg = 'Any';
-  currentDep = 'Any';
-  currentGrp = 'Any';
-  currentAdd = '';
+  private deps: Array<string> = [];
+  private progs: Array<string> = [];
+  private bloodgrps: Array<string> = [];
+  private halls: Array<string> = [];
+  private genders: Array<string> = [];
+  private years: Array<string> = [];
+
+  private latestTerm: string = '';
+  private currentYear = 'Any';
+  private currentGender = 'Any';
+  private currentHall = 'Any';
+  private currentProg = 'Any';
+  private currentDep = 'Any';
+  private currentGrp = 'Any';
+  private currentAdd = '';
 
   private searchTerms = new Subject<string>();
   private addTerms = new Subject<string>();
@@ -57,7 +62,7 @@ export class SearchComponent implements OnInit {
       .debounceTime(300)        // wait 300ms after each keystroke before considering the term
       .distinctUntilChanged()   // ignore if next search term is same as previous
       .subscribe(term => {
-        if (term && term.length > 3) {
+        if (term !== '') {
           this.latestTerm = term;
           this.update();
         } else {
@@ -103,12 +108,25 @@ export class SearchComponent implements OnInit {
   }
 
   update(): void {
-    if (this.latestTerm !== '') {
-      this.result = this.search.getResults(this.students, this.latestTerm, this.currentYear, this.currentGender,
-                                           this.currentHall, this.currentProg, this.currentDep, this.currentGrp,
-                                           this.currentAdd);
-    } else {
+    if (this.latestTerm.length > 2 || this.currentYear !== 'Any' || this.currentGender !== 'Any' ||
+        this.currentHall !== 'Any' || this.currentProg !== 'Any' || this.currentDep !== 'Any' || this.currentGrp !== 'Any' ||
+        this.currentAdd !== '') {
       this.result = [];
+      this.allResults = this.search.getResults(this.students, this.latestTerm, this.currentYear, this.currentGender,
+                                               this.currentHall, this.currentProg, this.currentDep, this.currentGrp,
+                                               this.currentAdd);
+      this.result = this.result.concat(this.allResults.slice(0, FACTOR));
+      this.maxIndex = 50;
+    } else {
+      this.allResults = [];
+      this.result = [];
+    }
+  }
+
+  addMoreElements() {
+    if (this.maxIndex < this.allResults.length) {
+      this.result = this.result.concat(this.allResults.slice(this.maxIndex, this.maxIndex + FACTOR));
+      this.maxIndex += FACTOR;
     }
   }
 

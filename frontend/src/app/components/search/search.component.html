@@ -58,7 +58,11 @@
 </div>
 
 <md-spinner *ngIf="loading"></md-spinner>
-<div *ngIf="!loading">
+<div *ngIf="!loading"
+     infinite-scroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="300"
+     (scrolled)="addMoreElements()">
   <masonry [options]="{ fitWidth: true }">
     <masonry-brick class="brick" *ngFor="let item of result">
       <search-student [student]="item"></search-student>
