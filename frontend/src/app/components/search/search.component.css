@@ -43,3 +43,17 @@ masonry {
   margin: 0 auto;
   width: 80%;
 }
+
+.fab {
+  bottom: 2%;
+  height: 2.8rem;
+  position: fixed;
+  right: 2%;
+  text-align: center;
+  width : 2.8rem;
+}
+
+.fab md-icon {
+  height: 2.8rem;
+  width : 2.8rem;
+}

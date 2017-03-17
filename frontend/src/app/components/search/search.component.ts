@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
+import { MailDialogComponent } from '../mail-dialog';
 import { SearchHelper } from '../../helpers/search.helper';
 import { SearchService } from '../../services/search.service';
 import { Student } from '../../models/student.model';
@@ -43,7 +45,8 @@ export class SearchComponent implements OnInit {
   private searchTerms = new Subject<string>();
   private addTerms = new Subject<string>();
 
-  constructor(private search: SearchService) {}
+  constructor(private dialog: MdDialog,
+              private search: SearchService) {}
 
   searchTerm(term: string): void {
     this.searchTerms.next(term);
@@ -128,6 +131,14 @@ export class SearchComponent implements OnInit {
       this.result = this.result.concat(this.allResults.slice(this.maxIndex, this.maxIndex + FACTOR));
       this.maxIndex += FACTOR;
     }
+  }
+
+  showMailDialog() {
+    this.dialog.open(MailDialogComponent, {
+      data: {
+        mails: this.allResults.map((val) => val.u + '@iitk.ac.in')
+      }
+    })
   }
 
 }

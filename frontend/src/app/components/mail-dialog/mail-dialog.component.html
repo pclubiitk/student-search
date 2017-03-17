@@ -1,0 +1,11 @@
+<h1 md-dialog-title> Mail Students </h1>
+<md-dialog-content>
+  Press the 'Copy' button to copy the mails to the clipboard! <br>
+  <pre>
+{{ mails.join(', ') }}
+  </pre>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button ngxClipboard [cbContent]="mails.join(',')" (cbOnSuccess)="successSnackBar()"> Copy </button>
+  <button md-button md-dialog-close> Close </button>
+</md-dialog-actions>
