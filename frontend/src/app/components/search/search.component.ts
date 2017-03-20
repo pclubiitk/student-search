@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
+import { HelpDialogComponent } from '../help-dialog';
 import { MailDialogComponent } from '../mail-dialog';
 import { SearchHelper } from '../../helpers/search.helper';
 import { SearchService } from '../../services/search.service';
@@ -139,6 +140,10 @@ export class SearchComponent implements OnInit {
         mails: this.allResults.map((val) => val.u + '@iitk.ac.in')
       }
     });
+  }
+
+  showHelpDialog() {
+    this.dialog.open(HelpDialogComponent);
   }
 
 }

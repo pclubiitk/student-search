@@ -6,6 +6,5 @@
   </pre>
 </md-dialog-content>
 <md-dialog-actions>
-  <button md-button ngxClipboard [cbContent]="mails.join(',')" (cbOnSuccess)="successSnackBar()"> Copy </button>
-  <button md-button md-dialog-close> Close </button>
+  <button md-raised-button ngxClipboard [cbContent]="mails.join(',')" (cbOnSuccess)="successSnackBar()"> Copy </button>
 </md-dialog-actions>
