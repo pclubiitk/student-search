@@ -24,4 +24,21 @@ func StudentSearchRoute(db *pg.DB) {
 		}
 	})
 
+	api.Get("/student", func(ctx *iris.Context) {
+		var students []database.Student
+		if ctx.URLParam("username") != "" {
+			err := db.Model(&students).Where("username LIKE ?", ctx.URLParam("username")).Select()
+			if err != nil {
+				ctx.Text(iris.StatusNotFound, "")
+				return
+			}
+			err = ctx.JSON(iris.StatusOK, students[0])
+			if err != nil {
+				ctx.Text(iris.StatusInternalServerError, "")
+			}
+			return
+		}
+		ctx.Text(iris.StatusNotFound, "")
+	})
+
 }
