@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MdDialog, MdInputDirective } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit {
 
   students: Array<Student> = [];
   loading = true;
+  @ViewChild('searchBox', {read: MdInputDirective}) searchBox;
 
   private maxIndex: number;
   allResults: Array<Student> = [];
@@ -106,6 +107,7 @@ export class SearchComponent implements OnInit {
       this.years = year.filter(this.onlyUnique).sort();
 
       this.loading = false;
+      this.searchBox.focus();
 
     });
 

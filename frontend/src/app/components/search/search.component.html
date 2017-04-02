@@ -47,7 +47,7 @@
     <div class="search-grid flex-row">
       <md-icon>search</md-icon>
       <md-input-container floatPlaceholder="never" class="search-box">
-        <input #searchBox mdInput placeholder="Name, Username or Roll" (keyup)="searchTerm(searchBox.value)" [disabled]="loading">
+        <input #searchBox mdInput placeholder="Name, Username or Roll" type="text" (keyup)="searchTerm(searchBox.value)">
       </md-input-container>
     </div>
   </div>
