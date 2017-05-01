@@ -17,6 +17,6 @@ RUN mkdir -p /src && cp -a /tmp/node_modules /src/
 
 WORKDIR /src
 ADD . /src
-RUN cd /src && ng build --prod
+RUN cd /src && ng build --prod --aot
 
 COPY nginx.conf /etc/nginx/nginx.conf
