@@ -24,7 +24,6 @@
         "styles.css"
       ],
       "scripts": [
-        "../node_modules/clipboard/dist/clipboard.js",
         "../node_modules/hammerjs/hammer.js"
       ],
       "environmentSource": "environments/environment.ts",
