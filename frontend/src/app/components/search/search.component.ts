@@ -73,6 +73,7 @@ export class SearchComponent implements OnInit {
         } else {
           this.latestTerm = '';
           this.result = [];
+          this.allResults = [];
         }
       });
 
