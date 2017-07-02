@@ -1,52 +1,52 @@
 <div class="width-60">
-  <div class="flex-col-container">
-    <div class="flex-row-container flex-row">
-      <div class="flex-col">
+  <div fxLayout="column" fxLayoutAlign="center space-around">
+    <div fxLayout="row" fxLayoutAlign="center space-around" fxLayoutWrap>
+      <div>
         <md-select placeholder="Year" [(ngModel)]="currentYear" (change)="update()" [disabled]="loading">
           <md-option value="Any"> Any </md-option>
           <md-option *ngFor="let year of years" [value]="year">{{ year }}</md-option>
         </md-select>
       </div>
-      <div class="flex-col">
+      <div>
         <md-select placeholder="Gender" [(ngModel)]="currentGender" (change)="update()" [disabled]="loading">
           <md-option value="Any"> Any </md-option>
           <md-option value="M">Male</md-option>
           <md-option value="F">Female</md-option>
         </md-select>
       </div>
-      <div class="flex-col">
+      <div>
         <md-select placeholder="Hall" [(ngModel)]="currentHall" (change)="update()" [disabled]="loading">
           <md-option value="Any"> Any </md-option>
           <md-option *ngFor="let hall of halls" [value]="hall">{{ hall }}</md-option>
         </md-select>
       </div>
-      <div class="flex-col">
+      <div>
         <md-select placeholder="Programme" [(ngModel)]="currentProg" (change)="update()" [disabled]="loading">
           <md-option value="Any"> Any </md-option>
           <md-option *ngFor="let prog of progs" [value]="prog">{{ prog }}</md-option>
         </md-select>
       </div>
-      <div class="flex-col">
+      <div>
         <md-select placeholder="Department" [(ngModel)]="currentDep" (change)="update()" [disabled]="loading">
           <md-option value="Any"> Any </md-option>
           <md-option *ngFor="let dep of deps" [value]="dep">{{ dep }}</md-option>
         </md-select>
       </div>
-      <div class="flex-col">
+      <div>
         <md-select placeholder="Blood Group" [(ngModel)]="currentGrp" (change)="update()" [disabled]="loading">
           <md-option value="Any"> Any </md-option>
           <md-option *ngFor="let grp of bloodgrps" [value]="grp">{{ grp }}</md-option>
         </md-select>
       </div>
     </div>
-    <div class="address-grid flex-row">
+    <div fxLayout="row" fxLayoutAlign="center center">
       <md-input-container>
         <input class="text-area" #hometown mdInput placeholder="Hometown" (keyup)="addTerm(hometown.value)" [disabled]="loading">
       </md-input-container>
     </div>
-    <div class="search-grid flex-row">
+    <div fxLayout="row" fxLayoutAlign="center center" class="search-grid">
       <md-icon>search</md-icon>
-      <md-input-container floatPlaceholder="never" class="search-box">
+      <md-input-container floatPlaceholder="never" fxFlex="">
         <input #searchBox mdInput placeholder="Name, Username or Roll" type="text" (keyup)="searchTerm(searchBox.value)">
       </md-input-container>
     </div>

@@ -1,19 +1,9 @@
 .img {
   background-size: cover;
-  flex-grow: 1;
-  min-height: 240px;
-  min-width: 240px;
+  height: 240px;
+  width: 240px;
 }
 
 .info {
-  flex-grow: 2;
   margin-left: 20px;
-}
-
-.container {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
 }
