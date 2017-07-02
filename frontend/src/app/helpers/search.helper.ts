@@ -14,6 +14,7 @@ export class SearchHelper {
     'Materials Science & Engg.': 'MSE',
     'Biol.Sci. And Bio.Engg.': 'BSBE',
     'Mathematics': 'MTH',
+    'Math For Pg Online': 'MTH',
     'Physics': 'PHY',
     'Ind. & Management Engg.': 'IME',
     'Humanities & Soc. Sciences': 'HSS',
