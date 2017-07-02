@@ -1,9 +1,9 @@
-<div class="container" (click)="openDialog()">
+<div fxLayout="row" fxLayoutAlign="center stretch" class="container" (click)="openDialog()">
   <div class="img" [style.background-image]="url()">
   </div>
   <div class="info">
     <span class="name"> {{ student.n }} </span> <br>
-    {{ student.d }} <br>
+    {{ dept }} <br>
     {{ parseYear(student.i) === 'Other' ? student.i : parseYear(student.i) }} <br>
   </div>
 </div>

@@ -21,6 +21,10 @@ export class StudentComponent {
   constructor(private sanitizer: DomSanitizer,
               private dialog: MdDialog) {}
 
+  get dept() {
+    return SearchHelper.ParseBranch(this.student.d);
+  }
+
   url = () => {
     return this.sanitizer.bypassSecurityTrustStyle(SearchHelper.ImageURL(this.student.g, this.student.i, this.student.u));
   }
