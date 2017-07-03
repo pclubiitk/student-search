@@ -1,94 +1,49 @@
-<h1 md-dialog-title> {{ student.n }} </h1>
 <md-dialog-content>
   <!--
   <div>
     {{ student | json }}
   </div>
   -->
-  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutWrap >
-    <div class="img" [style.background-image]="url()">
+  <div fxLayout="column" fxLayoutAlign="center stretch" class="container">
+    <div>
+      <div class="img" [style.background-image]="url()">
+      </div>
     </div>
+    <div class="name"> {{ student.n }} </div>
+    <div class="roll"> ({{ student.i }}) </div>
+    <div class="dept">{{ student.p }}, {{ student.d }}</div>
     <div class="info">
-      <table>
-        <tr>
-          <td>
-            Name
-          </td>
-          <td>
-            {{ student.n }}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Programme
-          </td>
-          <td>
-            {{ student.p }}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Department
-          </td>
-          <td>
-            {{ student.d }}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Roll
-          </td>
-          <td>
-            {{ student.i }}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Campus Address
-          </td>
-          <td>
-            {{ student.r + " " + student.h }}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Hometown
-          </td>
-          <td>
-            {{ student.a }}
-          </td>
-        </tr>
-        <tr>
-          <td>
-             Blood Group
-          </td>
-          <td>
-            {{ student.b }}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Gender
-          </td>
-          <td>
-            {{ student.g }}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Email
-          </td>
-          <td>
-            <a [href]="'mailto:' + student.u + '@iitk.ac.in'"> {{ student.u }}@iitk.ac.in </a>
-          </td>
-        </tr>
-
-
-      </table>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <md-icon class="right-margin">account_balance</md-icon>
+        <span fxFlex="">
+          {{ student.r + ", " + student.h }}
+        </span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <md-icon class="right-margin">home</md-icon>
+        <span fxFlex="">
+          {{ student.a }}
+        </span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <md-icon class="right-margin">invert_colors</md-icon>
+        <span fxFlex="">
+          {{ student.b }}
+        </span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <md-icon class="right-margin">mail</md-icon>
+        <a fxFlex="" [href]="'mailto:' + student.u + '@iitk.ac.in'"> {{ student.u }}@iitk.ac.in </a>
+      </div>
+    </div>
+    <div>
+      <span fxFlex="" class="text-center">
+        <a md-button	[href]="'http://home.iitk.ac.in/~' + student.u">
+          <md-icon>public</md-icon>
+          <br>
+          <span> Homepage </span>
+        </a>
+      </span>
     </div>
   </div>
 </md-dialog-content>
-<md-dialog-actions>
-  <button md-button md-dialog-close>Close</button>
-</md-dialog-actions>
-
