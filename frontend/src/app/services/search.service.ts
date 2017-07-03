@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/concat';
 
 import { SearchHelper } from '../helpers/search.helper';
 import { Student } from '../models/student.model';
@@ -10,8 +11,8 @@ export class SearchService {
 
   constructor(private http: Http) {}
 
-  getInformation(): Promise<Array<Student>> {
-    return this.http.get('https://search.pclub.in/api/students')
+  getInformation(): Observable<Array<Student>> {
+    let request = this.http.get('https://search.pclub.in/api/students')
       .map((res: Response) => {
         function compare(a: Student, b: Student) {
           if (a.i < b.i) {
@@ -23,8 +24,16 @@ export class SearchService {
           return 0;
         }
         const students = res.json() as Array<Student>;
-        return students.sort(compare);
-      }).toPromise();
+        const sorted = students.sort(compare);
+        localStorage.setItem('search-data', JSON.stringify(sorted));
+        return sorted;
+      });
+    if (localStorage.getItem('search-data')) {
+      const students = JSON.parse(localStorage.getItem('search-data')) as Array<Student>;
+      return Observable.of(students).concat(request);
+    } else {
+      return request;
+    }
   }
 
   getResults(students: Array<Student>, term: string, year?: string, gender?: string,

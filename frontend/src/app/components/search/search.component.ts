@@ -85,8 +85,7 @@ export class SearchComponent implements OnInit {
         this.update();
       });
 
-    this.search.getInformation().then((res) => {
-
+    this.search.getInformation().subscribe((res) => {
       this.students = res;
 
       const deps = res.map((val) => SearchHelper.ParseBranch(val.d));
