@@ -36,9 +36,9 @@ export class SearchService {
     }
   }
 
-  getResults(students: Array<Student>, term: string, year?: string, gender?: string,
-             hall?: string, prog?: string, dep?: string,
-             grp?: string, hometown ?: string): Array<Student> {
+  getResults(students: Array<Student>, term: string, year?: Array<string>, gender?: string,
+             hall?: Array<string>, prog?: Array<string>, dep?: Array<string>,
+             grp?: Array<string>, hometown ?: string): Array<Student> {
 
     const escape = (s: string) => {
       return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -47,8 +47,8 @@ export class SearchService {
 
     const filter = (elem: Student): Boolean => {
 
-      if (!(year === null || year === 'Any')) {
-        if (SearchHelper.ParseYear(elem.i) !== year) {
+      if (!(year === null || year.length === 0)) {
+        if (!year.includes(SearchHelper.ParseYear(elem.i))) {
           return false;
         }
       }
@@ -59,26 +59,26 @@ export class SearchService {
         }
       }
 
-      if (!(hall === null || hall === 'Any')) {
-        if (elem.h !== hall) {
+      if (!(hall === null || hall.length === 0)) {
+        if (!hall.includes(elem.h)) {
           return false;
         }
       }
 
-      if (!(prog === null || prog === 'Any')) {
-        if (elem.p !== prog) {
+      if (!(prog === null || prog.length === 0)) {
+        if (!prog.includes(elem.p)) {
           return false;
         }
       }
 
-      if (!(dep === null || dep === 'Any')) {
-        if (SearchHelper.ParseBranch(elem.d) !== dep) {
+      if (!(dep === null || dep.length === 0)) {
+        if (!(dep.includes(SearchHelper.ParseBranch(elem.d)))) {
           return false;
         }
       }
 
-      if (!(grp === null || grp === 'Any')) {
-        if (elem.b !== grp) {
+      if (!(grp === null || grp.length === 0)) {
+        if (!grp.includes(elem.b)) {
           return false;
         }
       }

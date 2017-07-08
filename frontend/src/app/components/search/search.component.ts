@@ -36,12 +36,12 @@ export class SearchComponent implements OnInit {
   years: Array<string> = [];
 
   private latestTerm = '';
-  currentYear = 'Any';
+  currentYear = [];
   currentGender = 'Any';
-  currentHall = 'Any';
-  currentProg = 'Any';
-  currentDep = 'Any';
-  currentGrp = 'Any';
+  currentHall = [];
+  currentProg = [];
+  currentDep = [];
+  currentGrp = [];
   currentAdd = '';
 
   private searchTerms = new Subject<string>();
@@ -67,14 +67,8 @@ export class SearchComponent implements OnInit {
       .debounceTime(300)        // wait 300ms after each keystroke before considering the term
       .distinctUntilChanged()   // ignore if next search term is same as previous
       .subscribe(term => {
-        if (term !== '') {
-          this.latestTerm = term;
-          this.update();
-        } else {
-          this.latestTerm = '';
-          this.result = [];
-          this.allResults = [];
-        }
+        this.latestTerm = term;
+        this.update();
       });
 
     this.addTerms
@@ -113,10 +107,15 @@ export class SearchComponent implements OnInit {
 
   }
 
+  isAny(arr: Array<String>) {
+    return (arr.length == 0 ||
+            (arr.length === 1 && arr[0] === 'Any'));
+  }
+
   update(): void {
-    if (this.latestTerm.length > 2 || this.currentYear !== 'Any' || this.currentGender !== 'Any' ||
-        this.currentHall !== 'Any' || this.currentProg !== 'Any' || this.currentDep !== 'Any' || this.currentGrp !== 'Any' ||
-        this.currentAdd !== '') {
+    if (this.latestTerm.length > 2 || this.currentYear.length !== 0 || this.currentGender !== 'Any' ||
+        this.currentHall.length !== 0 || this.currentProg.length !== 0 || this.currentDep.length !== 0 ||
+        this.currentGrp.length !== 0 || this.currentAdd !== '') {
       this.result = [];
       this.allResults = this.search.getResults(this.students, this.latestTerm, this.currentYear, this.currentGender,
                                                this.currentHall, this.currentProg, this.currentDep, this.currentGrp,
