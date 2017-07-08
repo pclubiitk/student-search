@@ -1,8 +1,7 @@
 # pclubiitk/student-search:frontend
 FROM nginx
-
 RUN apt-get update
-RUN apt-get -y install curl && \
+RUN apt-get -y install gnupg && apt-get -y install curl && \
     curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
     apt-get install -y nodejs
 
