@@ -2,8 +2,7 @@
   <div fxLayout="column" fxLayoutAlign="center space-around">
     <div fxLayout="row" fxLayoutAlign="center space-around" fxLayoutWrap>
       <div>
-        <md-select placeholder="Year" [(ngModel)]="currentYear" (change)="update()" [disabled]="loading">
-          <md-option value="Any"> Any </md-option>
+        <md-select placeholder="Year" [(ngModel)]="currentYear" (change)="update()" [disabled]="loading" multiple>
           <md-option *ngFor="let year of years" [value]="year">{{ year }}</md-option>
         </md-select>
       </div>
@@ -15,26 +14,22 @@
         </md-select>
       </div>
       <div>
-        <md-select placeholder="Hall" [(ngModel)]="currentHall" (change)="update()" [disabled]="loading">
-          <md-option value="Any"> Any </md-option>
+        <md-select placeholder="Hall" [(ngModel)]="currentHall" (change)="update()" [disabled]="loading" multiple>
           <md-option *ngFor="let hall of halls" [value]="hall">{{ hall }}</md-option>
         </md-select>
       </div>
       <div>
-        <md-select placeholder="Programme" [(ngModel)]="currentProg" (change)="update()" [disabled]="loading">
-          <md-option value="Any"> Any </md-option>
+        <md-select placeholder="Programme" [(ngModel)]="currentProg" (change)="update()" [disabled]="loading" multiple>
           <md-option *ngFor="let prog of progs" [value]="prog">{{ prog }}</md-option>
         </md-select>
       </div>
       <div>
-        <md-select placeholder="Department" [(ngModel)]="currentDep" (change)="update()" [disabled]="loading">
-          <md-option value="Any"> Any </md-option>
+        <md-select placeholder="Department" [(ngModel)]="currentDep" (change)="update()" [disabled]="loading" multiple>
           <md-option *ngFor="let dep of deps" [value]="dep">{{ dep }}</md-option>
         </md-select>
       </div>
       <div>
-        <md-select placeholder="Blood Group" [(ngModel)]="currentGrp" (change)="update()" [disabled]="loading">
-          <md-option value="Any"> Any </md-option>
+        <md-select placeholder="Blood Group" [(ngModel)]="currentGrp" (change)="update()" [disabled]="loading" multiple>
           <md-option *ngFor="let grp of bloodgrps" [value]="grp">{{ grp }}</md-option>
         </md-select>
       </div>
@@ -49,6 +44,7 @@
       <md-input-container floatPlaceholder="never" fxFlex="">
         <input #searchBox mdInput placeholder="Name, Username or Roll" type="text" (keyup)="searchTerm(searchBox.value)">
       </md-input-container>
+      <md-icon>close</md-icon>
     </div>
   </div>
 </div>
