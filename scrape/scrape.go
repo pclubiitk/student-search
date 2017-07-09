@@ -8,10 +8,10 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/olebedev/config"
 	"github.com/pclubiitk/student-search/database"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/olebedev/config"
 	"gopkg.in/pg.v5"
 )
 
