@@ -8,27 +8,38 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/olebedev/config"
 	"github.com/pclubiitk/student-search/database"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/olebedev/config"
 	"gopkg.in/pg.v5"
 )
 
-func main() {
+type scraperConfig struct {
+	batchSize int
+	total     int
+	host      string
+	port      string
+	username  string
+	dbname    string
+}
 
+func main() {
 	runtime.GOMAXPROCS(8)
 	log.SetPrefix("[student-scrape] ")
 
-	batchSize, total, host, port, username, dbname := getConfig()
+	c, err := parseScraperConfig()
+	if err != nil {
+		log.Fatalf("Error getting scraper config: %v", err)
+	}
 
 	db := pg.Connect(&pg.Options{
-		Addr:     fmt.Sprintf("%s:%s", host, port),
-		Database: dbname,
-		User:     username,
+		Addr:     fmt.Sprintf("%s:%s", c.host, c.port),
+		Database: c.dbname,
+		User:     c.username,
 	})
 
-	err := database.CreateStudentSchema(db)
+	err = database.CreateStudentSchema(db)
 	if err != nil {
 		log.Printf("Error in createSchema: %s\n", err.Error())
 	}
@@ -52,18 +63,18 @@ func main() {
 	} else {
 		log.Println("Starting")
 		// Process in sizes of batchSize and then wait for completion
-		for j := 0; j < total+1; j += batchSize {
+		for j := 0; j < c.total+1; j += c.batchSize {
 			var wg sync.WaitGroup
-			for i := j; i < j+batchSize; i += 12 {
+			for i := j; i < j+c.batchSize; i += 12 {
 				// Add 1 to waitgroup for each go routine launched
 				wg.Add(1)
 				go fetchNums(i, db, &wg)
 			}
 			// Wait for all goroutines in this batch to finish
 			wg.Wait()
-			log.Printf("Done %d\n", j+batchSize)
+			log.Printf("Done %d\n", j+c.batchSize)
 		}
-		log.Println("Done ", total)
+		log.Println("Done ", c.total)
 	}
 
 	// Cleanup
@@ -88,39 +99,40 @@ func fetchNums(count int, db *pg.DB, wg *sync.WaitGroup) {
 	})
 }
 
-func getConfig() (int, int, string, string, string, string) {
+func parseScraperConfig() (*scraperConfig, error) {
 	cfg, err := config.ParseYamlFile("./scraper-config.yml")
+	var c scraperConfig
 	if err != nil {
-		log.Fatalln("Unable to get config. Aborting")
+		return nil, fmt.Errorf("error reading config: %v", err)
 	}
 	cfg.EnvPrefix("STUDENT_SCRAPE")
 
-	batchSize, err := cfg.Int("scrape.batch") // Multiple of 12 to prevent repititions
+	c.batchSize, err = cfg.Int("scrape.batch") // Multiple of 12 to prevent repititions
 	if err != nil {
-		log.Fatalln("Unable to get batch size from config. Aborting")
+		return nil, fmt.Errorf("error parsing batch size: %v", err)
 	}
-	if batchSize%12 != 0 {
-		log.Fatalf("Batch size: %d must be a multiple of 12 to prevent db errors. Aborting", batchSize)
+	if c.batchSize%12 != 0 {
+		return nil, fmt.Errorf("batch size should be a multiple of 12 to prevent DB errors, got: %d", c.batchSize)
 	}
-	total, err := cfg.Int("scrape.total")
+	c.total, err = cfg.Int("scrape.total")
 	if err != nil {
-		log.Fatalln("Unable to get total from config. Aborting")
+		return nil, fmt.Errorf("error parsing total: %v", err)
 	}
-	host, err := cfg.String("pg.host")
+	c.host, err = cfg.String("pg.host")
 	if err != nil {
-		log.Fatalln("Unable to get host from config. Aborting")
+		return nil, fmt.Errorf("error parsing host: %v", err)
 	}
-	port, err := cfg.String("pg.port")
+	c.port, err = cfg.String("pg.port")
 	if err != nil {
-		log.Fatalln("Unable to get port from config. Aborting")
+		return nil, fmt.Errorf("error parsing port: %v", err)
 	}
-	username, err := cfg.String("pg.username")
+	c.username, err = cfg.String("pg.username")
 	if err != nil {
-		log.Fatalln("Unable to get username from config. Aborting")
+		return nil, fmt.Errorf("error parsing username: %v", err)
 	}
-	dbname, err := cfg.String("pg.database")
+	c.dbname, err = cfg.String("pg.database")
 	if err != nil {
-		log.Fatalln("Unable to get dbname from config. Aborting")
+		return nil, fmt.Errorf("error parsing database: %v", err)
 	}
-	return batchSize, total, host, port, username, dbname
+	return &c, nil
 }
