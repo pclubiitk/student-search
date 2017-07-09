@@ -107,31 +107,26 @@ func parseScraperConfig() (*scraperConfig, error) {
 	}
 	cfg.EnvPrefix("STUDENT_SCRAPE")
 
-	c.batchSize, err = cfg.Int("scrape.batch") // Multiple of 12 to prevent repititions
-	if err != nil {
+	if c.batchSize, err = cfg.Int("scrape.batch"); err != nil {
 		return nil, fmt.Errorf("error parsing batch size: %v", err)
 	}
+	// Multiple of 12 to prevent repetitions
 	if c.batchSize%12 != 0 {
 		return nil, fmt.Errorf("batch size should be a multiple of 12 to prevent DB errors, got: %d", c.batchSize)
 	}
-	c.total, err = cfg.Int("scrape.total")
-	if err != nil {
+	if c.total, err = cfg.Int("scrape.total"); err != nil {
 		return nil, fmt.Errorf("error parsing total: %v", err)
 	}
-	c.host, err = cfg.String("pg.host")
-	if err != nil {
+	if c.host, err = cfg.String("pg.host"); err != nil {
 		return nil, fmt.Errorf("error parsing host: %v", err)
 	}
-	c.port, err = cfg.String("pg.port")
-	if err != nil {
+	if c.port, err = cfg.String("pg.port"); err != nil {
 		return nil, fmt.Errorf("error parsing port: %v", err)
 	}
-	c.username, err = cfg.String("pg.username")
-	if err != nil {
+	if c.username, err = cfg.String("pg.username"); err != nil {
 		return nil, fmt.Errorf("error parsing username: %v", err)
 	}
-	c.dbname, err = cfg.String("pg.database")
-	if err != nil {
+	if c.dbname, err = cfg.String("pg.database"); err != nil {
 		return nil, fmt.Errorf("error parsing database: %v", err)
 	}
 	return &c, nil
