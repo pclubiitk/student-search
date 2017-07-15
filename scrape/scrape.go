@@ -11,8 +11,8 @@ import (
 	"github.com/pclubiitk/student-search/database"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/go-pg/pg"
 	"github.com/olebedev/config"
-	"gopkg.in/pg.v5"
 )
 
 type scraperConfig struct {

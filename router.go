@@ -1,44 +1,45 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/pclubiitk/student-search/database"
 
-	"gopkg.in/kataras/iris.v5"
-	"gopkg.in/pg.v5"
+	"github.com/go-pg/pg"
+	"github.com/labstack/echo"
 )
 
 // StudentSearchRoute is a route for the search.
-func StudentSearchRoute(db *pg.DB) {
+func StudentSearchRoute(e *echo.Echo, db *pg.DB) {
 
-	api := iris.Party("/api")
+	// A group is a set of endpoints behind the same path
+	api := e.Group("/api")
 
-	api.Get("/students", func(ctx *iris.Context) {
+	api.GET("/students", func(ctx echo.Context) error {
 		var students []database.Student
 		err := db.Model(&students).Select()
 		if err != nil {
-			panic(err)
+			return err
 		}
-		err = ctx.JSON(iris.StatusOK, students)
-		if err != nil {
-			panic(err)
+		if students == nil {
+			return ctx.NoContent(http.StatusNotFound)
 		}
+		return ctx.JSON(http.StatusOK, students)
 	})
 
-	api.Get("/student", func(ctx *iris.Context) {
+	api.GET("/student", func(ctx echo.Context) error {
 		var students []database.Student
-		if ctx.URLParam("username") != "" {
-			err := db.Model(&students).Where("username LIKE ?", ctx.URLParam("username")).Select()
-			if err != nil {
-				ctx.Text(iris.StatusNotFound, "")
-				return
-			}
-			err = ctx.JSON(iris.StatusOK, students[0])
-			if err != nil {
-				ctx.Text(iris.StatusInternalServerError, "")
-			}
-			return
+		if ctx.QueryParam("username") == "" {
+			return ctx.NoContent(http.StatusBadRequest)
 		}
-		ctx.Text(iris.StatusNotFound, "")
+		err := db.Model(&students).Where("username LIKE ?", ctx.QueryParam("username")).Select()
+		if err != nil {
+			return err
+		}
+		if len(students) < 1 {
+			return ctx.NoContent(http.StatusNotFound)
+		}
+		return ctx.JSON(http.StatusOK, students[0])
 	})
 
 }
