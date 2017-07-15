@@ -1,17 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdDialog } from '@angular/material';
 
 import { DetailComponent } from '../detail';
 import { SearchHelper } from '../../helpers/search.helper';
 import { Student } from '../../models/student.model';
+import { fadeInOutAnimation } from '../../animations/fade-in-out.animation';
 
 @Component({
   selector: 'search-student',
   templateUrl: './student.component.html',
-  styleUrls: ['./student.component.css']
+  styleUrls: ['./student.component.css'],
+  animations: [ fadeInOutAnimation ]
 })
 export class StudentComponent {
+
+  @HostBinding('@fadeInOutAnimation') fadeInOutAnimation = '';
 
   @Input()
   student: Student;

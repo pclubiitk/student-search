@@ -8,7 +8,6 @@ import { MaterialModule } from '@angular/material';
 
 import { ClipboardModule } from 'ngx-clipboard';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MasonryModule } from 'angular2-masonry';
 
 import { DetailComponent } from './components/detail';
 import { HelpDialogComponent } from './components/help-dialog';
@@ -38,7 +37,6 @@ import { StudentComponent } from './components/student';
     FormsModule,
     HttpModule,
     InfiniteScrollModule,
-    MasonryModule,
     MaterialModule
   ],
   providers: [SearchService],
