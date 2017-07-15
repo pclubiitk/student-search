@@ -54,12 +54,10 @@
      infinite-scroll
      [infiniteScrollDistance]="2"
      [infiniteScrollThrottle]="300"
-     (scrolled)="addMoreElements()">
-  <masonry [options]="{ fitWidth: true }">
-    <masonry-brick class="brick" *ngFor="let item of result">
-      <search-student [student]="item"></search-student>
-    </masonry-brick>
-  </masonry>
+     (scrolled)="addMoreElements()"
+     fxLayout="row" fxLayoutAlign="center center"
+     fxLayoutWrap>
+  <search-student *ngFor="let item of result" [student]="item"></search-student>
 </div>
 
 <button md-fab *ngIf="allResults.length > 0" class="fab" (click)="showMailDialog()">
