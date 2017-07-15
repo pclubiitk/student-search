@@ -13,6 +13,14 @@ import (
 	"gopkg.in/pg.v5"
 )
 
+type serverConfig struct {
+	pghost   string
+	pgport   string
+	username string
+	dbname   string
+	httpport int
+}
+
 func main() {
 
 	iris.Config.Gzip = true
@@ -25,22 +33,25 @@ func main() {
 	// log http errors
 	iris.OnError(iris.StatusNotFound, myCorsMiddleware)
 
-	pghost, pgport, username, dbname, port := getConfig()
+	c, err := getConfig()
+	if err != nil {
+		iris.Logger.Printf("Error getting server config: %v\n", err)
+	}
 
 	db := pg.Connect(&pg.Options{
-		Addr:     fmt.Sprintf("%s:%s", pghost, pgport),
-		Database: dbname,
-		User:     username,
+		Addr:     fmt.Sprintf("%s:%s", c.pghost, c.pgport),
+		Database: c.dbname,
+		User:     c.username,
 	})
 
-	err := database.CreateStudentSchema(db)
+	err = database.CreateStudentSchema(db)
 	if err != nil {
 		iris.Logger.Printf("Error in createSchema: %s\n", err.Error())
 	}
 
 	StudentSearchRoute(db)
 
-	iris.Listen(fmt.Sprintf(":%d", port))
+	iris.Listen(fmt.Sprintf(":%d", c.httpport))
 }
 
 // myCorsMiddleware for handling OPTIONS requests
@@ -60,28 +71,28 @@ func myCorsMiddleware(ctx *iris.Context) {
 
 }
 
-func getConfig() (string, string, string, string, int) {
+func getConfig() (*serverConfig, error) {
 	cfg, err := config.ParseYamlFile("./config.yml")
 	if err != nil {
-		iris.Logger.Fatalln("Unable to get config. Aborting")
+		return nil, fmt.Errorf("error reading config: %v", err)
 	}
 	cfg.EnvPrefix("STUDENT_SEARCH")
+	var c serverConfig
 
-	pghost, err := cfg.String("pg.host")
-	check(err, "Postgres Hostname")
-	pgport, err := cfg.String("pg.port")
-	check(err, "Postgres Port")
-	username, err := cfg.String("pg.username")
-	check(err, "Postgres Username")
-	dbname, err := cfg.String("pg.database")
-	check(err, "Postgres DBName")
-	port, err := cfg.Int("http.port")
-	check(err, "Http Listen Port")
-	return pghost, pgport, username, dbname, port
-}
-
-func check(err error, item string) {
-	if err != nil {
-		iris.Logger.Fatalf("Unable to get %s from config. Error: ", err.Error())
+	if c.pghost, err = cfg.String("pg.host"); err != nil {
+		return nil, fmt.Errorf("error parsing postgres host: %v", err)
 	}
+	if c.pgport, err = cfg.String("pg.port"); err != nil {
+		return nil, fmt.Errorf("error parsing postgres port: %v", err)
+	}
+	if c.username, err = cfg.String("pg.username"); err != nil {
+		return nil, fmt.Errorf("error parsing postgres username: %v", err)
+	}
+	if c.dbname, err = cfg.String("pg.database"); err != nil {
+		return nil, fmt.Errorf("error parsing postgres database name: %v", err)
+	}
+	if c.httpport, err = cfg.Int("http.port"); err != nil {
+		return nil, fmt.Errorf("error parsing http port: %v", err)
+	}
+	return &c, nil
 }
