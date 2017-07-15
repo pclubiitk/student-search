@@ -5,14 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"regexp"
 	"strings"
 	"sync"
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
-	"gopkg.in/pg.v5"
-	"gopkg.in/pg.v5/orm"
+	"github.com/go-pg/pg"
+	"github.com/go-pg/pg/orm"
 )
 
 // Student structure to store student information.
@@ -68,8 +67,7 @@ func CreateStudentSchema(db *pg.DB) error {
 	err := db.CreateTable(model, &orm.CreateTableOptions{})
 	// Error for already existing schema which is not something we care about as the schema
 	// is mostly constant
-	var validError = regexp.MustCompile(`^.*ERROR #42P07.*$`)
-	if validError.MatchString(err.Error()) {
+	if err != nil && strings.Contains(err.Error(), "ERROR #42P07") {
 		return nil
 	}
 	return err

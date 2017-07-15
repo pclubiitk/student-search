@@ -5,12 +5,10 @@ import (
 
 	"github.com/pclubiitk/student-search/database"
 
-	"github.com/iris-contrib/middleware/cors"
-	"github.com/iris-contrib/middleware/logger"
-	"github.com/iris-contrib/middleware/recovery"
+	"github.com/go-pg/pg"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/olebedev/config"
-	"gopkg.in/kataras/iris.v5"
-	"gopkg.in/pg.v5"
 )
 
 type serverConfig struct {
@@ -23,19 +21,16 @@ type serverConfig struct {
 
 func main() {
 
-	iris.Config.Gzip = true
-	iris.Config.LoggerPreffix = "[student-search] "
-
-	iris.Use(logger.New())
-	iris.Use(recovery.New())
-	iris.Use(cors.Default())
-
-	// log http errors
-	iris.OnError(iris.StatusNotFound, myCorsMiddleware)
+	e := echo.New()
+	loggerConfig := middleware.LoggerConfig{
+		Format: "[student-search] ${remote_ip} - - [${time_rfc3339}] \"${method} ${uri}\" ${status} ${bytes_out}\n",
+	}
+	e.Use(middleware.Gzip(), middleware.Recover(), middleware.LoggerWithConfig(loggerConfig))
 
 	c, err := getConfig()
+
 	if err != nil {
-		iris.Logger.Printf("Error getting server config: %v\n", err)
+		e.Logger.Fatalf("Error in getting config: %v", err)
 	}
 
 	db := pg.Connect(&pg.Options{
@@ -44,30 +39,12 @@ func main() {
 		User:     c.username,
 	})
 
-	err = database.CreateStudentSchema(db)
-	if err != nil {
-		iris.Logger.Printf("Error in createSchema: %s\n", err.Error())
+	if err = database.CreateStudentSchema(db); err != nil {
+		e.Logger.Fatalf("Error in createSchema: %v\n", err)
 	}
 
-	StudentSearchRoute(db)
-
-	iris.Listen(fmt.Sprintf(":%d", c.httpport))
-}
-
-// myCorsMiddleware for handling OPTIONS requests
-func myCorsMiddleware(ctx *iris.Context) {
-
-	if ctx.MethodString() == "OPTIONS" {
-		ctx.SetHeader("Access-Control-Allow-Origin", "*")
-		ctx.SetHeader("Access-Control-Allow-Headers", "content-type")
-		err := ctx.Text(200, "")
-		if err != nil {
-			panic(err)
-		}
-	} else {
-		errorLogger := logger.New()
-		errorLogger.Serve(ctx)
-	}
+	StudentSearchRoute(e, db)
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", c.httpport)))
 
 }
 
