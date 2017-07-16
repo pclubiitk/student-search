@@ -99,7 +99,18 @@ export class SearchService {
 
     };
 
-    return students.filter(filter);
+    // Use forloop instead of filter
+    // see https://jsperf.com/javascript-filter-vs-loop
+    // return students.filter(filter);
+
+    const resultArray = [];
+    for (let i = 0; i < students.length; i++) {
+      const student = students[i];
+      if (filter(student)) {
+        resultArray.push(student);
+      }
+    }
+    return resultArray;
 
   }
 
