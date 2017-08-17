@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/concat';
+import 'rxjs/add/operator/map';
 
 import { SearchHelper } from '../helpers/search.helper';
 import { Student } from '../models/student.model';
