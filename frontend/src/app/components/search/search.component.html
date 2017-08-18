@@ -50,6 +50,17 @@
 </div>
 
 <md-spinner *ngIf="loading"></md-spinner>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div *ngIf="allResults.length > 1" class="result-count">
+    {{ allResults.length }} Results Found
+  </div>
+  <div *ngIf="allResults.length === 1" class="result-count">
+    1 Result Found
+  </div>
+  <div *ngIf="allResults.length === 0" class="result-count">
+    No Results Found
+  </div>
+</div>
 <div *ngIf="!loading"
      infinite-scroll
      [infiniteScrollDistance]="2"
