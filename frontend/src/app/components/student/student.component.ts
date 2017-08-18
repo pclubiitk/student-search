@@ -37,7 +37,8 @@ export class StudentComponent {
     this.dialog.open(DetailComponent, {
       data: {
         student: this.student
-      }
+      },
+      width: '360px'
     });
   }
 
