@@ -38,6 +38,7 @@ export class StudentComponent {
       data: {
         student: this.student
       },
+      panelClass: 'centered-dialog',
       width: '360px'
     });
   }
