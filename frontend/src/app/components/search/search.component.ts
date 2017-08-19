@@ -142,12 +142,15 @@ export class SearchComponent implements OnInit {
     this.dialog.open(MailDialogComponent, {
       data: {
         mails: this.allResults.map((val) => val.u + '@iitk.ac.in')
-      }
+      },
+      panelClass: 'centered-dialog'
     });
   }
 
   showHelpDialog() {
-    this.dialog.open(HelpDialogComponent);
+    this.dialog.open(HelpDialogComponent, {
+      panelClass: 'centered-dialog'
+    });
   }
 
   registerServiceWorker() {

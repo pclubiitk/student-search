@@ -5,3 +5,11 @@
 body {
   margin-top: 0;
 }
+
+.centered-dialog {
+  max-width: 80vw;
+}
+
+.centered-dialog .mat-dialog-container {
+  max-width: none;
+}
