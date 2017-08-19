@@ -19,7 +19,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "ssearch",
+      "prefix": "search",
       "styles": [
         "styles.css"
       ],

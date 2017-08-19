@@ -108,7 +108,7 @@ export class SearchComponent implements OnInit {
   }
 
   isAny(arr: Array<String>) {
-    return (arr.length == 0 ||
+    return (arr.length === 0 ||
             (arr.length === 1 && arr[0] === 'Any'));
   }
 
