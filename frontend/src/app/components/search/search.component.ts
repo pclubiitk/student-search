@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MdDialog, MdInputDirective } from '@angular/material';
+import { MdDialog, MdInputDirective, MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
@@ -48,6 +48,7 @@ export class SearchComponent implements OnInit {
   private addTerms = new Subject<string>();
 
   constructor(private dialog: MdDialog,
+              private mdSnackBar: MdSnackBar,
               private search: SearchService) {}
 
   searchTerm(term: string): void {
@@ -62,6 +63,8 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.registerServiceWorker();
 
     this.searchTerms
       .debounceTime(300)        // wait 300ms after each keystroke before considering the term
@@ -145,6 +148,39 @@ export class SearchComponent implements OnInit {
 
   showHelpDialog() {
     this.dialog.open(HelpDialogComponent);
+  }
+
+  registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').then((reg) => {
+        reg.onupdatefound = () => {
+          const installingWorker = reg.installing;
+
+          installingWorker.onstatechange = () => {
+            switch (installingWorker.state) {
+            case 'installed':
+              if (navigator.serviceWorker.controller) {
+                const snackBarRef = this.mdSnackBar.open('Updated content is available', 'Reload');
+                snackBarRef.onAction().subscribe(() => {
+                  location.reload(true);
+                });
+              } else {
+                this.mdSnackBar.open('Content is now available offline!', '', {
+                  duration: 1000
+                });
+              }
+              break;
+
+            case 'redundant':
+              console.error('The installing service worker became redundant.');
+              break;
+            }
+          };
+        };
+      }).catch(function (e) {
+        console.error('Error during service worker registration:', e);
+      });
+    }
   }
 
 }
