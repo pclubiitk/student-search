@@ -12,7 +12,7 @@ export class SearchService {
   constructor(private http: Http) {}
 
   getInformation(): Observable<Array<Student>> {
-    let request = this.http.get('https://search.pclub.in/api/students')
+    const request = this.http.get('https://search.pclub.in/api/students')
       .map((res: Response) => {
         function compare(a: Student, b: Student) {
           if (a.i < b.i) {
