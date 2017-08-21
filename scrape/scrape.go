@@ -86,7 +86,7 @@ func main() {
 
 func fetchNums(count int, db *pg.DB, wg *sync.WaitGroup) {
 	defer wg.Done()
-	url := fmt.Sprintf("http://oa.cc.iitk.ac.in:8181/Oa/Jsp/OAServices/IITk_SrchStudRoll.jsp?recpos=%d&selstudrol=&selstuddep=&selstudnam=", count)
+	url := fmt.Sprintf("https://oa.cc.iitk.ac.in/Oa/Jsp/OAServices/IITk_SrchStudRoll.jsp?recpos=%d&selstudrol=&selstuddep=&selstudnam=", count)
 	doc, err := goquery.NewDocument(url)
 	if err != nil {
 		log.Printf("Error in fetchNums: %s\n", err.Error())

@@ -52,7 +52,7 @@ export class SearchHelper {
   static ImageURL(gender: string, rollnum: string, userid: string) {
     const generic = gender === 'F' ? this.GenericFemale : this.GenericMale;
     const iitkhome = `http://home.iitk.ac.in/~${ userid }/dp`;
-    const oaimage = `http://oa.cc.iitk.ac.in/Oa/Jsp/Photo/${ rollnum }_0.jpg`;
+    const oaimage = `https://oa.cc.iitk.ac.in/Oa/Jsp/Photo/${ rollnum }_0.jpg`;
     return `url("${ iitkhome }"), url("${ oaimage }"), url("${ generic }")`;
   }
 
