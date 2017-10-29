@@ -38,11 +38,13 @@
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" class="search-grid">
-      <mat-icon>search</mat-icon>
+      <mat-icon class="search-icon">search</mat-icon>
       <mat-form-field floatPlaceholder="never" fxFlex="">
         <input #searchBox matInput placeholder="Name, Username or Roll" type="text" (keyup)="searchTerm(searchBox.value)">
       </mat-form-field>
-      <mat-icon>close</mat-icon>
+      <button mat-icon-button (click)="searchTerm(searchBox.value='')" [disabled]="searchBox.value == ''">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
   </div>
 </div>
