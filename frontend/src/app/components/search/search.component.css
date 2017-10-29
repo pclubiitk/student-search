@@ -26,14 +26,17 @@
   background-color: #fff;
 }
 
-.search-grid mat-icon {
-  text-align: center;
-  width: 80px;
-}
-
 .search-grid {
   background-color: #eee;
   width: 100%;
+}
+
+.search-grid button {
+  margin: 10px;
+}
+
+.search-icon {
+  margin: 18px;
 }
 
 mat-spinner {
