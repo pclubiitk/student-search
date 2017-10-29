@@ -82,3 +82,15 @@ masonry {
   margin: 10px;
   padding: 10px;
 }
+
+.close {
+  min-width: initial;
+  padding: 0 5px;
+  margin: 0 16px;
+  line-height: 34px;
+  border-radius: 50%;
+}
+
+.close md-icon {
+  width: auto;
+}

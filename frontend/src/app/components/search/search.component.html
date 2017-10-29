@@ -44,7 +44,7 @@
       <md-input-container floatPlaceholder="never" fxFlex="">
         <input #searchBox mdInput placeholder="Name, Username or Roll" type="text" (keyup)="searchTerm(searchBox.value)">
       </md-input-container>
-      <md-icon>close</md-icon>
+      <button md-button class="close" (click)="searchTerm(searchBox.value='')"><md-icon>close</md-icon></button>
     </div>
   </div>
 </div>
