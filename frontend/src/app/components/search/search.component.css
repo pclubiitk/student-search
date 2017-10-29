@@ -65,6 +65,7 @@ masonry {
 .fab md-icon {
   height: 2.8rem;
   width : 2.8rem;
+  padding: 11px 0;
 }
 
 .help {
