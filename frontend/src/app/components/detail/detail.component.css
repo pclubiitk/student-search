@@ -1,3 +1,7 @@
+.mat-dialog-content {
+    max-height: 80vh;
+}
+
 .img {
   background-size: cover;
   border-radius: 100px;
