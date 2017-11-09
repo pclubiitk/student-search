@@ -51,10 +51,12 @@ export class SearchComponent implements OnInit {
               private mdSnackBar: MdSnackBar,
               private search: SearchService) {}
 
-  searchTerm(term: string): void {
+  searchTerm(t: string): void {
+    const term = t.trim();
     this.searchTerms.next(term);
   }
-  addTerm(term: string): void {
+  addTerm(t: string): void {
+    const term = t.trim();
     this.addTerms.next(term);
   }
 
