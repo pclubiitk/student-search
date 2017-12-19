@@ -13,7 +13,8 @@
         "favicon-16x16.png",
         "favicon-32x32.png",
         "manifest.json",
-        "browserconfig.xml"
+        "browserconfig.xml",
+        "robots.txt"
       ],
       "index": "index.html",
       "main": "main.ts",
