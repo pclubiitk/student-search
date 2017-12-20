@@ -12,17 +12,9 @@
   }
 }
 
-md-select {
-  background-color: #fff;
-  /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+.search-options {
   margin: 15px;
-  padding: 25px;
-}
-
-@media (max-width: 960px) {
-  md-select {
-    padding: 5px;
-  }
+  padding: 5px;
 }
 
 .mat-select-underline {
@@ -34,7 +26,7 @@ md-select {
   background-color: #fff;
 }
 
-.search-grid md-icon {
+.search-grid mat-icon {
   text-align: center;
   width: 80px;
 }
@@ -44,7 +36,7 @@ md-select {
   width: 100%;
 }
 
-md-spinner {
+mat-spinner {
   margin: 10vh auto;
 }
 
@@ -62,7 +54,7 @@ masonry {
   width : 2.8rem;
 }
 
-.fab md-icon {
+.fab mat-icon {
   height: 2.8rem;
   width : 2.8rem;
 }
