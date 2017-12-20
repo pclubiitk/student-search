@@ -1,4 +1,4 @@
-<md-dialog-content>
+<mat-dialog-content>
   <!--
   <div>
     {{ student | json }}
@@ -14,36 +14,36 @@
     <div class="dept">{{ student.p }}, {{ student.d }}</div>
     <div class="info">
       <div fxLayout="row" fxLayoutAlign="center center">
-        <md-icon class="right-margin">account_balance</md-icon>
+        <mat-icon class="right-margin">account_balance</mat-icon>
         <span fxFlex="">
           {{ student.r + ", " + student.h }}
         </span>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center">
-        <md-icon class="right-margin">home</md-icon>
+        <mat-icon class="right-margin">home</mat-icon>
         <span fxFlex="">
           {{ student.a }}
         </span>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center">
-        <md-icon class="right-margin">invert_colors</md-icon>
+        <mat-icon class="right-margin">invert_colors</mat-icon>
         <span fxFlex="">
           {{ student.b }}
         </span>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center">
-        <md-icon class="right-margin">mail</md-icon>
+        <mat-icon class="right-margin">mail</mat-icon>
         <a fxFlex="" [href]="'mailto:' + student.u + '@iitk.ac.in'"> {{ student.u }}@iitk.ac.in </a>
       </div>
     </div>
     <div>
       <span fxFlex="" class="text-center">
-        <a md-button	[href]="'http://home.iitk.ac.in/~' + student.u">
-          <md-icon>public</md-icon>
+        <a mat-button	[href]="'http://home.iitk.ac.in/~' + student.u">
+          <mat-icon>public</mat-icon>
           <br>
           <span> Homepage </span>
         </a>
       </span>
     </div>
   </div>
-</md-dialog-content>
+</mat-dialog-content>

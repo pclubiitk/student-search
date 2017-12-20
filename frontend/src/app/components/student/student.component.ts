@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { DetailComponent } from '../detail';
 import { SearchHelper } from '../../helpers/search.helper';
@@ -23,7 +23,7 @@ export class StudentComponent {
   parseYear = SearchHelper.ParseYear;
 
   constructor(private sanitizer: DomSanitizer,
-              private dialog: MdDialog) {}
+              private dialog: MatDialog) {}
 
   get dept() {
     return SearchHelper.ParseBranch(this.student.d);
