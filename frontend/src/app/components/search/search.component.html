@@ -42,7 +42,9 @@
       <mat-form-field floatPlaceholder="never" fxFlex="">
         <input #searchBox matInput placeholder="Name, Username or Roll" type="text" (keyup)="searchTerm(searchBox.value)">
       </mat-form-field>
-      <mat-icon>close</mat-icon>
+      <button mat-button class="close" [disabled]="searchBox.value.length === 0" (click)="searchTerm(searchBox.value='')">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
   </div>
 </div>
@@ -72,4 +74,6 @@
   <mat-icon>mail</mat-icon>
 </button>
 
-<button mat-icon-button class="help" (click)="showHelpDialog()"><mat-icon> help_outline </mat-icon></button>
+<button mat-icon-button class="help" (click)="showHelpDialog()">
+  <mat-icon> info_outline </mat-icon>
+</button>
