@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { SearchHelper } from '../../helpers/search.helper';
 import { Student } from '../../models/student.model';
@@ -14,9 +14,9 @@ export class DetailComponent {
 
   public student: Student;
 
-  constructor(public dialogRef: MdDialogRef<DetailComponent>,
+  constructor(public dialogRef: MatDialogRef<DetailComponent>,
               private sanitizer: DomSanitizer,
-              @Inject(MD_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     this.student = this.data.student;
   }
 

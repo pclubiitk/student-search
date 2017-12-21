@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MdDialog, MdInputDirective, MdSnackBar } from '@angular/material';
+import { MatDialog, MatInput, MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit {
 
   students: Array<Student> = [];
   loading = true;
-  @ViewChild('searchBox', {read: MdInputDirective}) searchBox;
+  @ViewChild('searchBox', { read: MatInput }) searchBox: MatInput;
 
   private maxIndex: number;
   allResults: Array<Student> = [];
@@ -47,14 +47,16 @@ export class SearchComponent implements OnInit {
   private searchTerms = new Subject<string>();
   private addTerms = new Subject<string>();
 
-  constructor(private dialog: MdDialog,
-              private mdSnackBar: MdSnackBar,
+  constructor(private dialog: MatDialog,
+              private matSnackBar: MatSnackBar,
               private search: SearchService) {}
 
-  searchTerm(term: string): void {
+  searchTerm(t: string): void {
+    const term = t.trim();
     this.searchTerms.next(term);
   }
-  addTerm(term: string): void {
+  addTerm(t: string): void {
+    const term = t.trim();
     this.addTerms.next(term);
   }
 
@@ -163,12 +165,12 @@ export class SearchComponent implements OnInit {
             switch (installingWorker.state) {
             case 'installed':
               if (navigator.serviceWorker.controller) {
-                const snackBarRef = this.mdSnackBar.open('Updated content is available', 'Reload');
+                const snackBarRef = this.matSnackBar.open('Updated content is available', 'Reload');
                 snackBarRef.onAction().subscribe(() => {
                   location.reload(true);
                 });
               } else {
-                this.mdSnackBar.open('Content is now available offline!', '', {
+                this.matSnackBar.open('Content is now available offline!', '', {
                   duration: 1000
                 });
               }

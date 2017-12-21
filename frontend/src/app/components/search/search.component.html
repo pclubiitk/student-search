@@ -1,55 +1,55 @@
 <div class="width-60">
-  <div fxLayout="column" fxLayoutAlign="center space-around">
-    <div fxLayout="row" fxLayoutAlign="center space-around" fxLayoutWrap>
-      <div>
-        <md-select placeholder="Year" [(ngModel)]="currentYear" (change)="update()" [disabled]="loading" multiple>
-          <md-option *ngFor="let year of years" [value]="year">{{ year }}</md-option>
-        </md-select>
-      </div>
-      <div>
-        <md-select placeholder="Gender" [(ngModel)]="currentGender" (change)="update()" [disabled]="loading">
-          <md-option value="Any"> Any </md-option>
-          <md-option value="M">Male</md-option>
-          <md-option value="F">Female</md-option>
-        </md-select>
-      </div>
-      <div>
-        <md-select placeholder="Hall" [(ngModel)]="currentHall" (change)="update()" [disabled]="loading" multiple>
-          <md-option *ngFor="let hall of halls" [value]="hall">{{ hall }}</md-option>
-        </md-select>
-      </div>
-      <div>
-        <md-select placeholder="Programme" [(ngModel)]="currentProg" (change)="update()" [disabled]="loading" multiple>
-          <md-option *ngFor="let prog of progs" [value]="prog">{{ prog }}</md-option>
-        </md-select>
-      </div>
-      <div>
-        <md-select placeholder="Department" [(ngModel)]="currentDep" (change)="update()" [disabled]="loading" multiple>
-          <md-option *ngFor="let dep of deps" [value]="dep">{{ dep }}</md-option>
-        </md-select>
-      </div>
-      <div>
-        <md-select placeholder="Blood Group" [(ngModel)]="currentGrp" (change)="update()" [disabled]="loading" multiple>
-          <md-option *ngFor="let grp of bloodgrps" [value]="grp">{{ grp }}</md-option>
-        </md-select>
-      </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <md-input-container>
-        <input class="text-area" #hometown mdInput placeholder="Hometown" (keyup)="addTerm(hometown.value)" [disabled]="loading">
-      </md-input-container>
+  <div fxLayout="column" fxLayoutAlign="space-around center">
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+      <mat-form-field class="search-options">
+        <mat-select placeholder="Year" [(ngModel)]="currentYear" (change)="update()" [disabled]="loading" multiple>
+          <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search-options">
+        <mat-select placeholder="Gender" [(ngModel)]="currentGender" (change)="update()" [disabled]="loading">
+          <mat-option value="Any"> Any </mat-option>
+          <mat-option value="M">Male</mat-option>
+          <mat-option value="F">Female</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search-options">
+        <mat-select placeholder="Hall" [(ngModel)]="currentHall" (change)="update()" [disabled]="loading" multiple>
+          <mat-option *ngFor="let hall of halls" [value]="hall">{{ hall }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search-options">
+        <mat-select placeholder="Programme" [(ngModel)]="currentProg" (change)="update()" [disabled]="loading" multiple>
+          <mat-option *ngFor="let prog of progs" [value]="prog">{{ prog }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search-options">
+        <mat-select placeholder="Department" [(ngModel)]="currentDep" (change)="update()" [disabled]="loading" multiple>
+          <mat-option *ngFor="let dep of deps" [value]="dep">{{ dep }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search-options">
+        <mat-select placeholder="Blood Group" [(ngModel)]="currentGrp" (change)="update()" [disabled]="loading" multiple>
+          <mat-option *ngFor="let grp of bloodgrps" [value]="grp">{{ grp }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search-options">
+        <input class="text-area" #hometown matInput placeholder="Hometown" (keyup)="addTerm(hometown.value)" [disabled]="loading">
+      </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" class="search-grid">
-      <md-icon>search</md-icon>
-      <md-input-container floatPlaceholder="never" fxFlex="">
-        <input #searchBox mdInput placeholder="Name, Username or Roll" type="text" (keyup)="searchTerm(searchBox.value)">
-      </md-input-container>
-      <button md-button class="close" (click)="searchTerm(searchBox.value='')"><md-icon>close</md-icon></button>
+      <mat-icon>search</mat-icon>
+      <mat-form-field floatPlaceholder="never" fxFlex="">
+        <input #searchBox matInput placeholder="Name, Username or Roll" type="text" (keyup)="searchTerm(searchBox.value)">
+      </mat-form-field>
+      <button mat-button class="close" [disabled]="searchBox.value.length === 0" (click)="searchTerm(searchBox.value='')">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
   </div>
 </div>
 
-<md-spinner *ngIf="loading"></md-spinner>
+<mat-spinner *ngIf="loading"></mat-spinner>
 <div fxLayout="row" fxLayoutAlign="center center">
   <div *ngIf="allResults.length > 1" class="result-count">
     {{ allResults.length }} Results Found
@@ -66,13 +66,14 @@
      [infiniteScrollDistance]="2"
      [infiniteScrollThrottle]="300"
      (scrolled)="addMoreElements()"
-     fxLayout="row" fxLayoutAlign="center center"
-     fxLayoutWrap>
+     fxLayout="row wrap" fxLayoutAlign="center center">
   <search-student *ngFor="let item of result" [student]="item"></search-student>
 </div>
 
-<button md-fab *ngIf="allResults.length > 0" class="fab" (click)="showMailDialog()">
-  <md-icon>mail</md-icon>
+<button mat-fab *ngIf="allResults.length > 0" class="fab" (click)="showMailDialog()">
+  <mat-icon>mail</mat-icon>
 </button>
 
-<button md-icon-button class="help" (click)="showHelpDialog()"><md-icon> info_outline </md-icon></button>
+<button mat-icon-button class="help" (click)="showHelpDialog()">
+  <mat-icon> info_outline </mat-icon>
+</button>
