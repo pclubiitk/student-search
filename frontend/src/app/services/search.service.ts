@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/concat';
 import 'rxjs/add/operator/map';
-import * as fuzzy from 'fuzzy';
 
 import { SearchHelper } from '../helpers/search.helper';
 import { Student } from '../models/student.model';
@@ -92,7 +91,8 @@ export class SearchService {
       }
 
       if (!(term === null || term === '')) {
-        return (fuzzy.test(term, elem.i) || fuzzy.test(term, elem.u) || fuzzy.test(term, elem.n));
+        const termregex = new RegExp(escape(term).replace(/\s+/g, ' '), 'i');
+        return (termregex.test(elem.i) || termregex.test(elem.u) || termregex.test(elem.n.replace(/\s+/g, ' ')));
       }
 
       return true;
