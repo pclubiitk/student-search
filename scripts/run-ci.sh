@@ -5,5 +5,5 @@ set -ev
 ./scripts/run-lint-frontend.sh
 
 # Build Steps
-./scripts/run-build-go.sh
+# ./scripts/run-build-go.sh
 ./scripts/run-build-frontend.sh
