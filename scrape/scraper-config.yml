@@ -1,8 +1,0 @@
-scrape:
-  batch: 540  # Multiple of 12
-  total: 8009  # At the time of creation
-pg:
-  host: localhost
-  port: 5432
-  username: postgres
-  database: postgres
