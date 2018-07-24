@@ -1,21 +1,40 @@
+# Scraping data
+* Create database:
+  ```
+  $ cd scrape
+  $ sqlite3 ../database/students.db < schema.sql
+  ```
+
+* Install dependencies (preferably in a virtual environment - see next section):
+  ```
+  $ pip install -r requirements.txt
+  ```
+
+* Run scraping script:
+  ```
+  $ ./scrape.py
+  ```
+
 # Contributing to the Backend
 
-* Setup Go
-  Install `go` from your software repos and install `glide` using:
+* Setup Python
+* Setup a virtual Environment using `virtualenv`:
   ```
-  $ curl https://glide.sh/get | sh
+  $ virtualenv /some/path/student-search
   ```
-* Clone this repo to your GOPATH
-  Set up your `$GOPATH` correctly.
+* Activate venv:
   ```
-  $ mkdir -p $GOPATH/src/github.com/pclubiitk
-  $ git clone https://github.com/pclubiitk/student-search $GOPATH/src/github.com/pclubiitk/student-search
+  $ source /some/path/student-search/bin/activate
   ```
-* Install Dependencies
+* Install dependencies:
   ```
-  $ cd $GOPATH/src/github.com/pclubiitk/student-search && glide install
+  $ pip install -r requirements.txt
   ```
-* Hack on this!!
+* Hack on this!! (Its recommended to have scraped some data before this step)
+  ```
+  $ cd backend/
+  $ FLASK_APP=server.py flask run
+  ```
 
 # Contributing to the frontend
 

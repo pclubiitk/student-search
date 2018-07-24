@@ -1,21 +1,14 @@
 version: '3'
 
 services:
-  postgres:
-    image: postgres
-    networks:
-      - studentsearch
-
   server:
     image: pclub/student-search
     ports:
       - "8080"
-    networks:
-      - studentsearch
-    links:
-      - postgres
     environment:
-      - STUDENT_SEARCH_PG_HOST=postgres
+      DB_LOC: /var/db/sqlite/students.db
+    volumes:
+      - ./database:/var/db/sqlite
 
   frontend:
     image: pclub/student-search:frontend
@@ -24,6 +17,3 @@ services:
 
 volumes:
   data:
-
-networks:
-  studentsearch:

@@ -4,19 +4,18 @@ A universal cross-platform and modern student search.
 This aims to be a unified IITK Student Search under the Programming Club
 IIT Kanpur with maximum possible platform support. Current Platforms
 being targeted:
-* Web
-* Android App
+* Web (this repo)
+* Android App (https://github.com/xoodle/frost)
 * CLI
 * Windows Universal App
 
 # Running the scraper
-The scraping script can be run by:
+See CONTRIBUTING.md for more detailed instructions.
+
+The scraping script can be run by first installing dependencies (`pip install -r requirements.txt`) and then:
 ```
-cd scrape && go run scrape.go
+cd scrape && ./scrape.py
 ```
-Things to improve in the scraping script:
-* Use [`pop/soda`](https://github.com/markbates/pop) library for db migrations
-* Use [`wspl/creeper`](https://github.com/wspl/creeper) library for cleaner Crawling
 
 # Thanks
 Thanks and credits to these members of the campus community for maintaining student searches

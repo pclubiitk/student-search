@@ -3,7 +3,7 @@
 from bs4 import BeautifulSoup
 import requests
 import sqlite3
-conn = sqlite3.connect('students.db')
+conn = sqlite3.connect('../database/students.db')
 c = conn.cursor()
 
 s = requests.Session()
