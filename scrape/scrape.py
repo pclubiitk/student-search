@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from bs4 import BeautifulSoup
+import re
 import requests
 import sqlite3
 conn = sqlite3.connect('../database/students.db')
@@ -41,10 +42,7 @@ payload1 = {
 
 TOTAL = 8385
 
-for i in range(0, TOTAL+1, 12):
-    payload['recpos'] = i
-    r = s.post("https://oa.cc.iitk.ac.in/Oa/Jsp/OAServices/IITk_SrchStudRoll_new.jsp", headers=headers, data=payload)
-    soup = BeautifulSoup(r.text, 'html.parser')
+def process_response_soup(soup, c):
     for link in soup.select('.TableText a'):
         roll = link.get_text().strip()
         payload1['numtxt'] = roll
@@ -98,6 +96,22 @@ for i in range(0, TOTAL+1, 12):
                   (roll, username, name, program, dept, hall, room,
                    blood_group, gender, hometown))
 
+
+r = s.post("https://oa.cc.iitk.ac.in/Oa/Jsp/OAServices/IITk_SrchStudRoll_new.jsp", headers=headers, data=payload)
+soup = BeautifulSoup(r.text, 'html.parser')
+for link in soup.select('.DivContent'):
+    substituted = re.sub(r'\s+', ' ', link.text)
+    pattern = re.compile(r'\s*You are viewing 1 to 12 records out of (\d+) records\s*')
+    match = pattern.match(substituted)
+    TOTAL = int(match.group(1))
+    print("Total: {}".format(TOTAL))
+process_response_soup(soup, c)
+print("Processed 12")
+for i in range(12, TOTAL+1, 12):
+    payload['recpos'] = i
+    r = s.post("https://oa.cc.iitk.ac.in/Oa/Jsp/OAServices/IITk_SrchStudRoll_new.jsp", headers=headers, data=payload)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    process_response_soup(soup, c)
     print("Processed {}".format(i + 12))
     conn.commit()
 conn.close()
