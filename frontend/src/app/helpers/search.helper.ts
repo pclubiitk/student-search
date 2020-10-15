@@ -34,7 +34,7 @@ export class SearchHelper {
         return 'Other';
       }
     } else {
-      if (value[0] === '1') {
+      if (value[0] === '1' || value[0] === '2') {
         return 'Y' + value.substr(0, 2);
       } else {
         return 'Other';
