@@ -1,10 +1,13 @@
+# pclubiitk/student-search:frontend
+
 ### STAGE 1: Build ###
 FROM node:6.16-alpine AS build
 WORKDIR /usr/src/app
-COPY package.json ./
-RUN npm install
+RUN npm install -g yarn @angular/cli
+COPY yarn.lock package.json ./
+RUN yarn install
 COPY . .
-RUN npm run build
+RUN yarn build:deploy
 
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
