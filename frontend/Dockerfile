@@ -1,21 +1,12 @@
-# pclubiitk/student-search:frontend
-FROM nginx
-RUN apt-get update
-RUN apt-get -y install gnupg && apt-get -y install curl && \
-    curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-    apt-get install -y nodejs
+### STAGE 1: Build ###
+FROM node:6.16-alpine AS build
+WORKDIR /usr/src/app
+COPY package.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-# Install yarn and ng-cli
-RUN npm install -g yarn @angular/cli
-
-# Cached layer for node_modules
-COPY package.json /tmp/package.json
-ADD yarn.lock /tmp/yarn.lock
-RUN cd /tmp && yarn install
-RUN mkdir -p /src && cp -a /tmp/node_modules /src/
-
-WORKDIR /src
-ADD . /src
-RUN cd /src && yarn build:deploy
-
+### STAGE 2: Run ###
+FROM nginx:1.17.1-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /usr/src/app/dist /usr/share/nginx/html
