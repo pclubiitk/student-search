@@ -33,7 +33,6 @@
     "ngx-clipboard": "^11.1.9",
     "ngx-infinite-scroll": "^6.9.1",
     "rxjs": "^6.6.3",
-    "rxjs-compat": "^6.0.0-rc.0",
     "web-animations-js": "^2.2.5",
     "zone.js": "^0.8.14"
   },
