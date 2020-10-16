@@ -1,4 +1,4 @@
 #!/bin/bash
 set -ev
 
-cd frontend && yarn build:deploy
+cd frontend && npm run build:deploy
