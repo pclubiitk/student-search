@@ -1,8 +1,7 @@
+import { of as observableOf, Observable } from 'rxjs';
+import { concat, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/concat';
-import 'rxjs/add/operator/map';
 
 import { SearchHelper } from '../helpers/search.helper';
 import { Student } from '../models/student.model';
@@ -13,8 +12,9 @@ export class SearchService {
   constructor(private http: HttpClient) {}
 
   getInformation(): Observable<Array<Student>> {
-    const request = this.http.get<Array<Student>>('https://search.pclub.in/api/students')
-      .map((students: Array<Student>) => {
+    const request = this.http
+      .get<Array<Student>>('https://search.pclub.in/api/students')
+      .pipe(map((students: Array<Student>) => {
         function compare(a: Student, b: Student) {
           if (a.i < b.i) {
             return -1;
@@ -27,10 +27,10 @@ export class SearchService {
         const sorted = students.sort(compare);
         localStorage.setItem('search-data', JSON.stringify(sorted));
         return sorted;
-      });
+      }));
     if (localStorage.getItem('search-data')) {
       const students = JSON.parse(localStorage.getItem('search-data')) as Array<Student>;
-      return Observable.of(students).concat(request);
+      return observableOf(students).pipe(concat(request));
     } else {
       return request;
     }

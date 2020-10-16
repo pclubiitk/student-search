@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatInput, MatSnackBar } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
+import { Subject } from 'rxjs';
+import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
 import { HelpDialogComponent } from '../help-dialog';
 import { MailDialogComponent } from '../mail-dialog';
@@ -69,17 +67,19 @@ export class SearchComponent implements OnInit {
     this.registerServiceWorker();
 
     this.searchTerms
-      .debounceTime(300)        // wait 300ms after each keystroke before considering the term
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .subscribe(term => {
+      .pipe(
+        debounceTime(300),        // wait 300ms after each keystroke before considering the term
+        distinctUntilChanged()   // ignore if next search term is same as previous
+      ).subscribe(term => {
         this.latestTerm = term;
         this.update();
       });
 
     this.addTerms
-      .debounceTime(300)
-      .distinctUntilChanged()
-      .subscribe(term => {
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged()
+      ).subscribe(term => {
         this.currentAdd = term;
         this.update();
       });
