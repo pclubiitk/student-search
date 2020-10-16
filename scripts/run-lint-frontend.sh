@@ -1,4 +1,4 @@
 #!/bin/bash
 set -ev
 
-cd frontend && yarn lint
+cd frontend && npm run lint

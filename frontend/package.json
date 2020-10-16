@@ -8,7 +8,7 @@
     "build": "ng build",
     "build:prod": "ng build --prod --stats-json",
     "sw": "node workbox-build.js",
-    "build:deploy": "yarn build:prod && yarn sw",
+    "build:deploy": "npm run -s build:prod && npm run -s sw",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
