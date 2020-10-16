@@ -1,0 +1,7 @@
+{
+    "/api": {
+      "target": "https://search.pclub.in",
+      "changeOrigin": true,
+      "secure": false
+    }
+}

@@ -13,7 +13,7 @@ export class SearchService {
 
   getInformation(): Observable<Array<Student>> {
     const request = this.http
-      .get<Array<Student>>('https://search.pclub.in/api/students')
+      .get<Array<Student>>('/api/students')
       .pipe(map((students: Array<Student>) => {
         function compare(a: Student, b: Student) {
           if (a.i < b.i) {
