@@ -2,34 +2,34 @@
   <div fxLayout="column" fxLayoutAlign="space-around center">
     <div fxLayout="row wrap" fxLayoutAlign="space-around center">
       <mat-form-field class="search-options">
-        <mat-select placeholder="Year" [(ngModel)]="currentYear" (change)="update()" [disabled]="loading" multiple>
+        <mat-select placeholder="Year" [(ngModel)]="currentYear" (selectionChange)="update()" [disabled]="loading" multiple>
           <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="search-options">
-        <mat-select placeholder="Gender" [(ngModel)]="currentGender" (change)="update()" [disabled]="loading">
+        <mat-select placeholder="Gender" [(ngModel)]="currentGender" (selectionChange)="update()" [disabled]="loading">
           <mat-option value="Any"> Any </mat-option>
           <mat-option value="M">Male</mat-option>
           <mat-option value="F">Female</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="search-options">
-        <mat-select placeholder="Hall" [(ngModel)]="currentHall" (change)="update()" [disabled]="loading" multiple>
+        <mat-select placeholder="Hall" [(ngModel)]="currentHall" (selectionChange)="update()" [disabled]="loading" multiple>
           <mat-option *ngFor="let hall of halls" [value]="hall">{{ hall }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="search-options">
-        <mat-select placeholder="Programme" [(ngModel)]="currentProg" (change)="update()" [disabled]="loading" multiple>
+        <mat-select placeholder="Programme" [(ngModel)]="currentProg" (selectionChange)="update()" [disabled]="loading" multiple>
           <mat-option *ngFor="let prog of progs" [value]="prog">{{ prog }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="search-options">
-        <mat-select placeholder="Department" [(ngModel)]="currentDep" (change)="update()" [disabled]="loading" multiple>
+        <mat-select placeholder="Department" [(ngModel)]="currentDep" (selectionChange)="update()" [disabled]="loading" multiple>
           <mat-option *ngFor="let dep of deps" [value]="dep">{{ dep }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="search-options">
-        <mat-select placeholder="Blood Group" [(ngModel)]="currentGrp" (change)="update()" [disabled]="loading" multiple>
+        <mat-select placeholder="Blood Group" [(ngModel)]="currentGrp" (selectionChange)="update()" [disabled]="loading" multiple>
           <mat-option *ngFor="let grp of bloodgrps" [value]="grp">{{ grp }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -39,7 +39,7 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" class="search-grid">
       <mat-icon class="search-icon">search</mat-icon>
-      <mat-form-field floatPlaceholder="never" fxFlex="">
+      <mat-form-field floatLabel="never" fxFlex="">
         <input #searchBox matInput placeholder="Name, Username or Roll" type="text" (keyup)="searchTerm(searchBox.value)">
       </mat-form-field>
       <button mat-icon-button (click)="searchTerm(searchBox.value='')" [disabled]="searchBox.value == ''">
