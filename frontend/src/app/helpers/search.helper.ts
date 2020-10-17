@@ -1,7 +1,7 @@
 export class SearchHelper {
 
-  static GenericMale = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yL/r/HsTZSDw4avx.gif';
-  static GenericFemale = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yp/r/yDnr5YfbJCH.gif';
+  static GenericMale = '/assets/images/GenericMale.png';
+  static GenericFemale = '/assets/images/GenericFemale.png';
 
   static branchMappings = {
     'Chemical Engg.': 'CHE',
