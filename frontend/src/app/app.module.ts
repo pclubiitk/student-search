@@ -24,11 +24,6 @@ import { StudentComponent } from './components/student';
     SearchComponent,
     StudentComponent
   ],
-  entryComponents: [
-    DetailComponent,
-    HelpDialogComponent,
-    MailDialogComponent
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
