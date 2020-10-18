@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit {
 
   students: Array<Student> = [];
   loading = true;
-  @ViewChild('searchBox', { read: MatInput }) searchBox: MatInput;
+  @ViewChild('searchBox', { read: MatInput, static: true }) searchBox: MatInput;
 
   private maxIndex: number;
   allResults: Array<Student> = [];
