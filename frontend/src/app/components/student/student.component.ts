@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { DetailComponent } from '../detail';
 import { SearchHelper } from '../../helpers/search.helper';
