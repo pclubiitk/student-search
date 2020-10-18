@@ -11,7 +11,8 @@
     "build:deploy": "npm run -s build:prod && npm run -s sw",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
