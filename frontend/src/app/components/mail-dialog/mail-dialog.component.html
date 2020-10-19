@@ -6,5 +6,9 @@
   </pre>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button ngxClipboard [cbContent]="mails.join(',')" (cbOnSuccess)="successSnackBar()"> Copy </button>
+  <button mat-raised-button
+          [cdkCopyToClipboard]="mails.join(',')"
+          (cdkCopyToClipboardCopied)="successSnackBar(); dialogRef.close();">
+    Copy
+  </button>
 </mat-dialog-actions>
