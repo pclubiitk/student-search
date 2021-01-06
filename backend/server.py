@@ -1,8 +1,11 @@
-from flask import abort, g, jsonify, request, Flask
+from flask import abort, g, jsonify, request, Flask, make_response, json
 import os
 from sqlite3 import connect
 
+from werkzeug.utils import secure_filename
+
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 
 DATABASE = os.getenv('DB_LOC', '../database/students.db')
 
@@ -62,3 +65,21 @@ def get_particular_student():
     if result is None:
         abort(404)
     return jsonify(jsonify_single_student(result))
+
+@app.route('/image-upload/', methods=["POST"])
+def upload_files():
+  path=os.path.join(os.path.join(app.root_path, 'uploads'), secure_filename(request.files['image'].filename))
+  print(path)
+  try:      
+    request.files['image'].save(path)
+  except:
+    os.mkdir('uploads')
+    request.files['image'].save(path)
+
+  #Execute script
+
+  response=make_response()
+  response.response=json.dumps({'result':'b'})
+  os.remove(path)
+  response.status_code=200
+  return response
