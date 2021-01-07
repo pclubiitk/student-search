@@ -45,6 +45,7 @@
       <button mat-icon-button (click)="searchTerm(searchBox.value='')" [disabled]="searchBox.value == ''">
         <mat-icon>close</mat-icon>
       </button>
+      <multiple-tabs></multiple-tabs>
     </div>
   </div>
 </div>
@@ -74,4 +75,7 @@
   <mat-icon>mail</mat-icon>
 </button>
 
-<button mat-icon-button class="help" (click)="showHelpDialog()"><mat-icon> help_outline </mat-icon></button>
+<div class="other-icons">
+  <button mat-icon-button class="help" (click)="showHelpDialog()"><mat-icon> help_outline </mat-icon></button>
+  <image-dialog-button></image-dialog-button>
+</div>

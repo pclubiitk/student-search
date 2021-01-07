@@ -66,7 +66,7 @@ def get_particular_student():
         abort(404)
     return jsonify(jsonify_single_student(result))
 
-@app.route('/image-upload/', methods=["POST"])
+@app.route('/image-upload', methods=["POST"])
 def upload_files():
   path=os.path.join(os.path.join(app.root_path, 'uploads'), secure_filename(request.files['image'].filename))
   print(path)
