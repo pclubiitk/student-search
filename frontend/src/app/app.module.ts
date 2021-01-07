@@ -6,6 +6,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { SearchMaterialModule } from './material.module';
+import {MatRadioModule} from '@angular/material/radio'
+import {MatButtonModule} from '@angular/material/button'
+import {MatInputModule} from '@angular/material/input'
+import {MatDialogModule} from '@angular/material/dialog'
+import {MatIconModule} from '@angular/material/icon'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { DetailComponent } from './components/detail';
@@ -14,6 +19,9 @@ import { MailDialogComponent } from './components/mail-dialog';
 import { SearchComponent } from './components/search';
 import { SearchService } from './services/search.service';
 import { StudentComponent } from './components/student';
+import {ImageDialogComponent, ImageDialogButtonComponent} from './components/image-upload/image-dialog.component'
+import { ImageService } from './components/image-upload/image.service';
+import {MultipleTabs, MultipleTabsDialog} from './components/multiple-tabs/multiple-tabs.component'
 
 @NgModule({
   declarations: [
@@ -21,7 +29,11 @@ import { StudentComponent } from './components/student';
     HelpDialogComponent,
     MailDialogComponent,
     SearchComponent,
-    StudentComponent
+    StudentComponent,
+    ImageDialogComponent,
+    ImageDialogButtonComponent,
+    MultipleTabs,
+    MultipleTabsDialog
   ],
   imports: [
     BrowserModule,
@@ -31,9 +43,14 @@ import { StudentComponent } from './components/student';
     FormsModule,
     HttpClientModule,
     InfiniteScrollModule,
-    SearchMaterialModule
+    SearchMaterialModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    MatRadioModule,
+    MatIconModule
   ],
-  providers: [SearchService],
+  providers: [SearchService, ImageService],
   bootstrap: [SearchComponent]
 })
 export class AppModule { }
