@@ -26,7 +26,7 @@ export class ImageDialogButtonComponent {
     const dialogRef = this.dialog.open(ImageDialogComponent, {});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 
@@ -52,12 +52,12 @@ export class ImageDialogComponent {
   }
   check(val){
     this.inIITK=val;
-    console.log(val)
+    console.log(val);
   }
   onBrowse(e){
     let f=<File>e.target.files[0];
     if(f.type.split('/')[0]!='image'){
-      console.log(f.type);
+      // console.log(f.type);
       //TODO snackbar
       return
     }
@@ -77,11 +77,11 @@ export class ImageDialogComponent {
     };
     reader.readAsDataURL(this.toUpload);
 
-    console.log(this.toUpload);
+    // console.log(this.toUpload);
   }
 
   onSubmit(form: NgForm){
-    console.log(form.form.value);
+    // console.log(form.form.value);
     if(form.form.valid&&this.inIITK){
       this.serv.postFile(this.toUpload, parseInt(form.form.value.radio));
     }
