@@ -61,12 +61,15 @@ masonry {
   padding: 0;
 }
 
-.help {
-  height: 2.8rem;
+.other-icons{
+  display: flex;
+  height: 6rem;
   position: fixed;
   right: 2%;
   top: 2%;
   width : 2.8rem;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .result-count {
