@@ -1,0 +1,6 @@
+numpy
+pickle
+dlib
+imutils
+cv2
+face_recognition

@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Reverse Search</h1>
+
+<form (ngSubmit)="onSubmit(uploadForm)" #uploadForm="ngForm">
+<div mat-dialog-content>
+    <img [src]="preview" id="uploadedImage">
+    <button id="browseButton" type="button" (click)="img_picker.click()" mat-stroked-button>Browse</button>
+    <input ngModel hidden type="file" name="image" ngModel #img_picker (change)="onBrowse($event)" accept="image/*" required>
+    <div *ngIf="tried&&!toUpload"
+     class="error" style="color: red; margin: 1rem;">* Please select an image &lt; 10MB</div>
+    <mat-radio-group id="radioGroup" name="radio" ngModel required aria-label="Select an option">
+      <mat-radio-button value="1">Person</mat-radio-button>
+      <mat-radio-button value="2">Landmark</mat-radio-button>
+    </mat-radio-group>
+    <div *ngIf="tried&&!uploadForm.form.value.radio"
+    class="error" style="color: red; margin: 1rem;">* Please select landmark or person</div>
+    <div>&nbsp;</div>
+</div>
+<div id="uploadButtonGroup" mat-dialog-actions>
+  <button type="button" mat-button (click)="onNoClick()">Close</button>
+  <button type="submit" color="accent" mat-raised-button>Search</button>
+</div>
+</form>
+<img [src]="'https://oa.cc.iitk.ac.in/Oa/Jsp/Images/iitklogoBlack.png'" hidden (load)="check(true)" (error)="check(false)" #img_hidden >
