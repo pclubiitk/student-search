@@ -1,6 +1,7 @@
 import helpers
 import time
 import pickle
+import argparse
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True,
