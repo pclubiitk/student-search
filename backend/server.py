@@ -51,13 +51,26 @@ def get_all_students():
 
 @app.route('/student')
 def get_particular_student():
+    # if roll is provided just use roll
+    roll = request.args.get('roll')
     username = request.args.get('username')
-    if username is None or username is '':
-        abort(400)
+    
+    # connect DB
     db = get_db()
     c = db.cursor()
-    print(username)
-    c.execute("SELECT * FROM students WHERE username IS ?", (username, ))
+
+    if roll is None or roll is 0 or roll is '':
+        # if username available
+        if username is None or username is '':
+            abort(400)  
+        print(username)
+        c.execute("SELECT * FROM students WHERE username IS ?", (username, ))  
+    else:
+        # if roll available
+        print(roll)
+        c.execute("SELECT * FROM students WHERE roll IS ?", (roll, ))
+    
+    # result
     result = c.fetchone()
     if result is None:
         abort(404)
