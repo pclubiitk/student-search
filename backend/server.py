@@ -51,13 +51,19 @@ def get_all_students():
 
 @app.route('/student')
 def get_particular_student():
+    print('hello')
     username = request.args.get('username')
-    if username is None or username is '':
+    roll = request.args.get('roll')
+    if ((username == None or username == '' )and (roll == None or roll == '')) :
         abort(400)
     db = get_db()
     c = db.cursor()
-    print(username)
-    c.execute("SELECT * FROM students WHERE username IS ?", (username, ))
+    if(username):
+        print(username)
+        c.execute("SELECT * FROM students WHERE username IS ?", (username, ))
+    else:
+        print(roll)
+        c.execute("SELECT * FROM students WHERE roll IS ?", (roll, ))
     result = c.fetchone()
     if result is None:
         abort(404)
