@@ -53,7 +53,7 @@ def get_all_students():
 def get_particular_student():
     username = request.args.get('username')
     roll = request.args.get('roll')
-    if ((username == None or username == '' )and (roll == None or roll == '')) :
+    if ((username is None or username is '' ) and (roll is None or roll is '')):
         abort(400)
     db = get_db()
     c = db.cursor()
