@@ -51,7 +51,6 @@ def get_all_students():
 
 @app.route('/student')
 def get_particular_student():
-    print('hello')
     username = request.args.get('username')
     roll = request.args.get('roll')
     if ((username == None or username == '' )and (roll == None or roll == '')) :
