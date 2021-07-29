@@ -92,7 +92,8 @@ export class SearchService {
 
       if (!(term === null || term === '')) {
         const termregex = new RegExp(escape(term).replace(/\s+/g, ' '), 'i');
-        return (termregex.test(elem.i) || termregex.test(elem.u) || termregex.test(elem.n.replace(/\s+/g, ' ')));
+        const hallregex = new RegExp(escape(term).replace(/\s+/g, ''), 'i');
+        return (termregex.test(elem.i) || termregex.test(elem.u) || termregex.test(elem.n.replace(/\s+/g, ' ')) || hallregex.test(elem.r.concat(',',elem.h)) || hallregex.test(elem.r) || hallregex.test(elem.h.replace(/\s+/g,'')));
       }
 
       return true;
